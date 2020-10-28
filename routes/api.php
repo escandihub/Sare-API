@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LicenciaController;
 use App\Http\Controllers\EnlaceController;
+use App\Http\Controllers\PermisoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ use App\Http\Controllers\EnlaceController;
 */
 Route::resource('enlaces', EnlaceController::class);
 Route::apiResource('licencia', LicenciaController::class);
+Route::apiResource('permisos',PermisoController::class);
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
