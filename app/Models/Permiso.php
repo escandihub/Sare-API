@@ -11,6 +11,9 @@ class Permiso extends Model
     protected $table = 'catalogopermisos';
     protected $primaryKey = 'Id';
 
+    const CREATED_AT = 'FechaRegistro';
+    const UPDATED_AT = 'FechaModificado';
+
     protected $fillable = [
         'Permiso',
         'Status',        
