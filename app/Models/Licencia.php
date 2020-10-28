@@ -29,6 +29,12 @@ class Licencia extends Model
         'MesConcluido',
         'Rango'
     ];
-    // 'FechaCreacion',
-    // 'FechaActualizacion',
+    
+
+    public function municipio(){
+        return $this->hasOne('App\Models\Enlace', 'Id', 'IdEnlaceMunicipal');
+    }
+    public function usuario(){
+        return $this->hasOne('App\Models\Usuario', 'Id', 'IdUsuario');
+    }
 }
