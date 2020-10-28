@@ -30,9 +30,8 @@ class PermisoController extends Controller
     public function store(PermisoRequest $request)
     {
         $permiso = new Permiso();
-        $permiso->fill($request->all());
-        $permiso->FechaRegistro = Carbon::now();
-        $permiso->FechaModificado = Carbon::now();
+        $permiso->fill($request->only('Permiso'));        
+        $permiso->save();
         return response()->json(['message'=>'Permiso agregado'], 201);
     }
 
@@ -56,8 +55,7 @@ class PermisoController extends Controller
      */
     public function update(PermisoRequest $request, Permiso $permiso)
     {
-        $permiso->fill($request->all());
-        $permiso->FechaModificado = Carbon::now();
+        $permiso->fill($request->only('Status'));        
         $permiso->save();
         return response()->json(['message'=>'Permiso actualizado'], 200);
     }
