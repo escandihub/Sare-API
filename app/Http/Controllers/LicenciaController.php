@@ -31,32 +31,25 @@ class LicenciaController extends Controller
      */
     public function store(Request $request)
     {
-        Licencia::create($request->all());
-    }
+        $indicador = Licencia::create($request->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Licencia  $licencia
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Licencia $licencia)
-    {
-        //
+        return response()->json(["message" => "Se ha agreado un Nuevo indicador"], 200);
     }
 
 
     /**
      * Update the specified resource in storage.
-     *
+     * @param route $identificador
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Licencia  $licencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Licencia $licencia)
+    public function update(Request $request, Licencia $licencia, $identificador)
     {
+        Licencia::find($identificador)->update($request->all());
+        
     return response()->json([
-        'menssage' => 'Se guardo con exito'
+        'menssage' => 'Actualizacion con exito',
     ], 200);
     }
 
@@ -66,8 +59,9 @@ class LicenciaController extends Controller
      * @param  \App\Models\Licencia  $licencia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Licencia $licencia)
+    public function destroy(Licencia $licencia, $identificador)
     {
-        //
+        $licencia->destroy($identificador);
+        return response()->json(['message' => 'Se ha Eliminado'], 200);
     }
 }
