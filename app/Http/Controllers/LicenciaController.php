@@ -55,7 +55,9 @@ class LicenciaController extends Controller
      */
     public function update(Request $request, Licencia $licencia)
     {
-        //
+    return response()->json([
+        'menssage' => 'Se guardo con exito'
+    ], 200);
     }
 
     /**
