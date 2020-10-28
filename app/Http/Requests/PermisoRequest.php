@@ -13,7 +13,7 @@ class PermisoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,14 @@ class PermisoRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        if ($this->getMethod() === 'POST') {
+            return [
+                'Permiso'=>['required']
+            ];
+        } else if ($this->getMethod() === 'PUT') {
+            return [
+                'Status'=>['required','numeric','min:1','max:2'],
+            ];
+        }
     }
 }
