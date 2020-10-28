@@ -12,10 +12,13 @@ class Licencia extends Model
      */
     use HasFactory;
     protected $table = 'totales_licencias';
-    protected $primaryKey = 'id_total';
+    protected $primaryKey = 'IdTotal';
+
+    const CREATED_AT = 'FechaCreacion';
+    const UPDATED_AT = 'FechaActualizacion';
 
     protected $fillable = [
-        'Licencias_Emitidad',
+        'Licencias_Emitidas',
         'Empleos_Generados',
         'Inversion_Generada',
         'No_Asesorias',
@@ -23,9 +26,9 @@ class Licencia extends Model
         'IdUsuario',
         'Mes',
         'Year',
-        'FechaCreacion',
-        'FechaActualizacion',
-        'mes',
+        'MesConcluido',
         'Rango'
     ];
+    // 'FechaCreacion',
+    // 'FechaActualizacion',
 }
