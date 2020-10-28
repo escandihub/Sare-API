@@ -15,6 +15,6 @@ class Grupo extends Model
         'Grupo','Descripcion','Status','FechaAlta','FechaModificacion'
     ];
     protected $hidden = [
-
+        
     ];
 }

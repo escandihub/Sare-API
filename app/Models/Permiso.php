@@ -13,8 +13,6 @@ class Permiso extends Model
 
     protected $fillable = [
         'Permiso',
-        'Status',
-        'FechaRegistro',
-        'FechaModificado'
+        'Status',        
     ];
 }

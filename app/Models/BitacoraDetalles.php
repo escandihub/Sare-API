@@ -14,6 +14,7 @@ class BitacoraDetalles extends Model
     protected $fillable = [
         'Descripcion','Referencia','Fecha','Entidad'
     ];
-    protected $hidden = [        
+    protected $hidden = [
+
     ];
 }
