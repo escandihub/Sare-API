@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Licencia;
 use Illuminate\Http\Request;
-
+/***
+ * Controlador que se relaciona con la entidad totales_licencias
+ *  => Indicador general
+ */
 class LicenciaController extends Controller
 {
     /**
