@@ -14,17 +14,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $usuarios = Usuario::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json($usuarios, 200);
     }
 
     /**
@@ -35,7 +27,9 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Usuario::create($request->all());
+        
+        return response()->json(['menssage' => "Se ha agregado un nuevo usuario"], 200);
     }
 
     /**
@@ -46,19 +40,9 @@ class UsuarioController extends Controller
      */
     public function show(Usuario $usuario)
     {
-        //
+        return response()->json($usuario, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Usuario $usuario)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -69,17 +53,8 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, Usuario $usuario)
     {
-        //
+        $usuario->update($request->all());
+        return response()->json(['message' => 'Se ha actualizado el usuario'], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Usuario $usuario)
-    {
-        //
-    }
 }
