@@ -25,11 +25,11 @@ class PermisoRequest extends FormRequest
     {
         if ($this->getMethod() === 'POST') {
             return [
-                'Permiso'=>['required']
+                'Permiso'=>['required','unique:catalogopermisos,Permiso']
             ];
         } else if ($this->getMethod() === 'PUT') {
             return [
-                'Status'=>['required','numeric','min:1','max:2'],
+                'Status'=>['required','numeric','min:1','max:2', 'unique:catalogopermisos,Permiso,' . $this->permiso->Id],
             ];
         }
     }
