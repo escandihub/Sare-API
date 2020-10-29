@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enlace;
 use Illuminate\Http\Request;
+use App\Http\Requests\EnlaceRequest;
 
 class EnlaceController extends Controller
 {
@@ -13,7 +15,8 @@ class EnlaceController extends Controller
      */
     public function index()
     {
-        //
+        $enlaces = Enlace::all();
+        return response()->json($enlaces, 200);
     }
 
     /**
@@ -22,9 +25,10 @@ class EnlaceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EnlaceRequest $request)
     {
-        //
+        Enlace::create($request->all());
+        return response()->json(['message'=>'Enlace registrado'], 201);
     }
 
     /**
@@ -45,9 +49,10 @@ class EnlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(EnlaceRequest $request, Enlace $enlace)
+    {        
+        $enlace->update($request->all());        
+        return response()->json(['message'=>'Enlace actualizado'], 200);
     }
 
     /**

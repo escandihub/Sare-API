@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PermisoRequest extends FormRequest
+class EnlaceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,11 @@ class PermisoRequest extends FormRequest
     {
         if ($this->getMethod() === 'POST') {
             return [
-                'Permiso'=>['required','unique:catalogopermisos,Permiso']
+                'Enlace_Municipal' => ['required','unique:catalogoenlaces,Enlace_Municipal']
             ];
-        } else if ($this->getMethod() === 'PUT') {
+        } else if ($this->getMethod() === 'PUT') {            
             return [
-                'Status'=>['required','numeric','min:1','max:2', 'unique:catalogopermisos,Permiso,' . $this->permiso->Id],
+                'Enlace_Municipal' => ['required', 'unique:catalogoenlaces,Enlace_Municipal,' . $this->enlace->Id]
             ];
         }
     }

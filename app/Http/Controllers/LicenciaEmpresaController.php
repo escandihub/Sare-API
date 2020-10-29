@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LicenciaEmpresaRequest;
 use App\Models\LicenciaEmpresa;
 use Illuminate\Http\Request;
 /**
@@ -23,24 +24,16 @@ class LicenciaEmpresaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LicenciaEmpresaRequest $request)
     {
-        //
+        $licenciaEmpresa = new LicenciaEmpresa();
+        $licenciaEmpresa->fill($request->all());
+        return response()->json(['message' => 'Registro agregado'], 201);
     }
 
     /**
@@ -50,19 +43,7 @@ class LicenciaEmpresaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(LicenciaEmpresa $licenciaEmpresa)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\LicenciaEmpresa  $licenciaEmpresa
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(LicenciaEmpresa $licenciaEmpresa)
-    {
-        //
+    {     
     }
 
     /**
