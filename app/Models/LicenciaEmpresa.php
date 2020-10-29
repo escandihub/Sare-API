@@ -23,8 +23,6 @@ class LicenciaEmpresa extends Model
         'Mes',
         'Year',
         'IdUsuario',
-        'FechaCreacion',
-        'FechaActualizacion',
         'MesConcluido',
         'Rango'
     ];
