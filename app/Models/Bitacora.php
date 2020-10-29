@@ -10,7 +10,7 @@ class Bitacora extends Model
     use HasFactory;
     protected $table = 'catalogobitacora';
     protected $primaryKey = 'IdTipo';
-    
+    public $timestamps = false;
     protected $fillable = [
         'TipoMovimiento'
     ];

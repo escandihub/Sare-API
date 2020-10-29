@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grupo;
 use Illuminate\Http\Request;
+use App\Http\Requests\GrupoRequest;
 
 /**
  * Agregar
@@ -18,7 +20,8 @@ class GrupoController extends Controller
      */
     public function index()
     {
-        //
+        $grupos = Grupo::all();
+        return response()->json($grupos, 200);
     }
 
     /**
@@ -27,9 +30,10 @@ class GrupoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GrupoRequest $request)
     {
-        //
+        Grupo::create($request->all());
+        return response()->json(['message'=>'Grupo agregado'], 201);
     }
 
     /**
@@ -40,7 +44,7 @@ class GrupoController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -50,9 +54,10 @@ class GrupoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GrupoRequest $request, Grupo $grupo)
     {
-        //
+        $grupo->update($request->all());
+        return response()->json(['message'=>'Grupo actualizado'], 200);
     }
 
     /**

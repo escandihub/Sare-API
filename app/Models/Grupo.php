@@ -11,8 +11,13 @@ class Grupo extends Model
     protected $table = 'catalogogrupos';
     protected $primaryKey = 'Id';
 
+    const CREATED_AT = 'FechaAlta';
+    const UPDATED_AT = 'FechaModificacion';
+    
     protected $fillable = [
-        'Grupo','Descripcion','Status','FechaAlta','FechaModificacion'
+        'Grupo',
+        'Descripcion',
+        'Status'
     ];
     protected $hidden = [
         
