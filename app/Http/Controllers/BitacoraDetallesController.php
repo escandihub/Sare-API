@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\BitacoraDetalles;
 
 class BitacoraDetallesController extends Controller
 {
@@ -11,9 +13,10 @@ class BitacoraDetallesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $bitacoras = BitacoraDetalles::whereBetween('Fecha', [$request->fecha_inicio, $request->fecha_fin])->paginate(7);
+        return response()->json($bitacoras, 200);
     }
 
     /**
@@ -24,7 +27,7 @@ class BitacoraDetallesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //        
     }
 
     /**

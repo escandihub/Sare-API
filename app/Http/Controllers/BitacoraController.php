@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BitacoraRequest;
+use App\Models\Bitacora;
 use Illuminate\Http\Request;
 
 class BitacoraController extends Controller
@@ -13,7 +15,8 @@ class BitacoraController extends Controller
      */
     public function index()
     {
-        //
+        $bitacoras = Bitacora::all();
+        return response()->json($bitacoras, 200);
     }
 
     /**
@@ -22,9 +25,10 @@ class BitacoraController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BitacoraRequest $request)
     {
-        //
+        Bitacora::create($request->all());
+        return response()->json(['message'=>'Movimiento agregado'], 201);
     }
 
     /**
@@ -45,9 +49,10 @@ class BitacoraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(BitacoraRequest $request, Bitacora $bitacora)
+    {        
+        $bitacora->update($request->all());
+        return response()->json(['message'=>'Movimiento agregado'], 200);
     }
 
     /**
