@@ -20,7 +20,9 @@ class LicenciaEmpresaController extends Controller
      */
     public function index()
     {
-        //
+        $fecha = data('Y');
+        $licencias = LicenciaEmpresa::where('Year', '=', $fecha);
+        return response()->json($licencias, 200);
     }
 
     /**
@@ -36,15 +38,6 @@ class LicenciaEmpresaController extends Controller
         return response()->json(['message' => 'Registro agregado'], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\LicenciaEmpresa  $licenciaEmpresa
-     * @return \Illuminate\Http\Response
-     */
-    public function show(LicenciaEmpresa $licenciaEmpresa)
-    {     
-    }
 
     /**
      * Update the specified resource in storage.
@@ -55,7 +48,9 @@ class LicenciaEmpresaController extends Controller
      */
     public function update(Request $request, LicenciaEmpresa $licenciaEmpresa)
     {
-        //
+        $licenciaEmpresa->update($request->all());
+        
+        return response()->json(['menssage' => 'Se Agrego una nueva Licencia por Empresa'], 200,);
     }
 
     /**
@@ -66,6 +61,21 @@ class LicenciaEmpresaController extends Controller
      */
     public function destroy(LicenciaEmpresa $licenciaEmpresa)
     {
-        //
+        $licenciaEmpresa->delete();
+        return response()->json(['message' => 'Se ha eliminado una licencia'], 200);
     }
+
+    /**
+     * Consulta de entre dos fechas fechas 
+     * @return \Illuminate\Http\Response
+     */
+
+    public function rangoFecha(Request $request){
+        $dataInicial = DateTime($request->fechaIncial);
+        $dataFinal = DateTime($request->fechaFinal);
+
+        $lista = LicenciaEmpresa::whereBetween('FechaCreacion', [$dataInicial, $dataFinal]);
+
+        return response()->json($lista, 200);
+  }
 }
