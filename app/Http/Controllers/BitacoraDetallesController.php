@@ -13,9 +13,15 @@ class BitacoraDetallesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function fechas(Request $request)
     {
         $bitacoras = BitacoraDetalles::whereBetween('Fecha', [$request->fecha_inicio, $request->fecha_fin])->paginate(7);
+        return response()->json($bitacoras, 200);
+    }
+
+    public function index(Request $request)
+    {
+        $bitacoras = BitacoraDetalles::paginate(12);
         return response()->json($bitacoras, 200);
     }
 

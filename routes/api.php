@@ -30,7 +30,9 @@ Route::apiResource('usuarios',UsuarioController::class);
 Route::apiResource('grupos',GrupoController::class);
 Route::apiResource('bitacoras',BitacoraController::class);
 
-Route::get('bitacora_detalles',[BitacoraDetallesController::class,'index']);
+Route::get('bitacora_detalles',[BitacoraDetallesController::class,'fechas']);
+Route::get('bitacora_all',[BitacoraDetallesController::class,'index']);
+
 Route::get('licencias_fechas',[LicenciaController::class,'rangoFecha']);
 Route::get('capturas_fechas',[LicenciaEmpresaController::class,'rangoFecha']);
 
