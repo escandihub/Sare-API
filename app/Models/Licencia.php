@@ -18,7 +18,6 @@ class Licencia extends Model
     const UPDATED_AT = 'FechaActualizacion';
 
     protected $fillable = [
-        'IdTotal',
         'Licencias_Emitidas',
         'Empleos_Generados',
         'Inversion_Generada',

@@ -33,7 +33,7 @@ class LicenciaController extends Controller
     {
         $indicador = Licencia::create($request->all());
 
-        return response()->json(["message" => "Se ha agreado un Nuevo indicador"], 200);
+        return response()->json(["message" => "Se ha agreado un Nuevo indicador"], 201);
     }
 
 
