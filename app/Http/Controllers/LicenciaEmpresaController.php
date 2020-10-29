@@ -20,9 +20,9 @@ class LicenciaEmpresaController extends Controller
      */
     public function index()
     {
-        $fecha = data('Y');
-        $licencias = LicenciaEmpresa::where('Year', '=', $fecha);
-        return response()->json($licencias, 200);
+        $fecha = date('Y');
+        $licencias_empresa = LicenciaEmpresa::where('Year', '=', $fecha)->get();
+        return response()->json($licencias_empresa, 200);
     }
 
     /**
@@ -33,8 +33,8 @@ class LicenciaEmpresaController extends Controller
      */
     public function store(LicenciaEmpresaRequest $request)
     {
-        $licenciaEmpresa = new LicenciaEmpresa();
-        $licenciaEmpresa->fill($request->all());
+        
+        LicenciaEmpresa::create($request->all());
         return response()->json(['message' => 'Registro agregado'], 201);
     }
 
