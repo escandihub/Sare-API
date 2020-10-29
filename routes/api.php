@@ -17,8 +17,8 @@ use App\Http\Controllers\PermisoController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::resource('enlaces', EnlaceController::class);
-Route::apiResource('licencia', LicenciaController::class);
+Route::apiResource('enlaces', EnlaceController::class);
+Route::apiResource('licencias', LicenciaController::class);
 Route::apiResource('permisos',PermisoController::class);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

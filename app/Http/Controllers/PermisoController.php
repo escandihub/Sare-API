@@ -28,10 +28,8 @@ class PermisoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(PermisoRequest $request)
-    {
-        $permiso = new Permiso();
-        $permiso->fill($request->only('Permiso'));        
-        $permiso->save();
+    {        
+        Permiso::create($request->only('Permiso'));        
         return response()->json(['message'=>'Permiso agregado'], 201);
     }
 
@@ -55,8 +53,7 @@ class PermisoController extends Controller
      */
     public function update(PermisoRequest $request, Permiso $permiso)
     {
-        $permiso->fill($request->only('Status'));        
-        $permiso->save();
+        $permiso->update($request->only('Status'));                
         return response()->json(['message'=>'Permiso actualizado'], 200);
     }
 

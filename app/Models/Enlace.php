@@ -9,12 +9,14 @@ class Enlace extends Model
 {
     use HasFactory;
     protected $table = 'catalogoenlaces';
-    protected $primaryKey = 'Id';
-    
+    protected $primaryKey = 'Id';    
+    const CREATED_AT = 'FechaRegistro';
+    const UPDATED_AT = 'FechaModificacion';
+
     protected $fillable = [
-        'Enlace_Municipal','FechaModificacion'
+        'Enlace_Municipal'
     ];
     protected $hidden = [
 
-    ];
+    ];  
 }

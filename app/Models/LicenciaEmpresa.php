@@ -11,6 +11,9 @@ class LicenciaEmpresa extends Model
     protected $table = 'licencias_empresa';
     protected $primaryKey = 'IdLicencia';
 
+    const CREATED_AT = 'FechaCreacion';
+    const UPDATED_AT = 'FechaActualizacion';
+    
     protected $fillable = [
         'Empresa',
         'Giro',
