@@ -31,6 +31,7 @@ Route::apiResource('grupos',GrupoController::class);
 Route::apiResource('bitacoras',BitacoraController::class);
 
 Route::get('bitacora_detalles',[BitacoraDetallesController::class,'index']);
+Route::get('licencias_fechas',[LicenciaController::class,'rangoFecha']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
