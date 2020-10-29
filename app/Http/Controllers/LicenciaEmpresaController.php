@@ -50,7 +50,7 @@ class LicenciaEmpresaController extends Controller
     {
         $licenciaEmpresa->update($request->all());
         
-        return response()->json(['menssage' => 'Se Agrego una nueva Licencia por Empresa'], 200,);
+        return response()->json(['menssage' => 'Se actualizo una nueva Licencia por Empresa'], 200,);
     }
 
     /**
