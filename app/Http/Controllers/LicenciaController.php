@@ -18,7 +18,7 @@ class LicenciaController extends Controller
     public function index()
     {
         $fecha = date('Y');
-        $licencias = Licencia::where('Year', '=', $fecha)->get();
+        $licencias = Licencia::where('Year', '=', $fecha)->with('municipio')->get();
         return response()->json($licencias, 200);
     }
 
@@ -44,12 +44,13 @@ class LicenciaController extends Controller
      * @param  \App\Models\Licencia  $licencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Licencia $licencia, $identificador)
+    public function update(Request $request, Licencia $licencia)
     {
-        Licencia::find($identificador)->update($request->all());
+        $licencia->update($request->all());
         
     return response()->json([
         'menssage' => 'Actualizacion con exito',
+        'licencia' => $licencia
     ], 200);
     }
 
@@ -59,9 +60,23 @@ class LicenciaController extends Controller
      * @param  \App\Models\Licencia  $licencia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Licencia $licencia, $identificador)
+    public function destroy(Licencia $licencia)
     {
-        $licencia->destroy($identificador);
+        $licencia->delete();
         return response()->json(['message' => 'Se ha Eliminado'], 200);
     }
+
+    /**
+     * Consulta de entre dos fechas fechas 
+     * @return \Illuminate\Http\Response
+     */
+
+     public function rangoFecha(Request $request){
+           $dataInicial = DateTime($request->fechaIncial);
+           $dataFinal = DateTime($request->fechaFinal);
+
+           $lista = Licencia::whereBetween('FechaCreacion', [$dataInicial, $dataFinal]);
+
+           return response()->json($lista, 200);
+     }
 }
