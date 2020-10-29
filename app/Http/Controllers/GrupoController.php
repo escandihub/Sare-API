@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+/**
+ * Agregar
+ * 3 => update
+ * 
+ */
 class GrupoController extends Controller
 {
     /**

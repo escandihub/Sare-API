@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\LicenciaEmpresa;
 use Illuminate\Http\Request;
-
+/**
+ * GET
+ * POST
+ * UPDATE
+ * ELIMIT
+ */
 class LicenciaEmpresaController extends Controller
 {
     /**
