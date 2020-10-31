@@ -21,7 +21,7 @@ class LicenciaEmpresaController extends Controller
     public function index()
     {
         $fecha = date('Y');
-        $licencias_empresa = LicenciaEmpresa::where('Year', '=', $fecha)->get();
+        $licencias_empresa = LicenciaEmpresa::where('Year', '=', $fecha)->paginate(10);
         return response()->json($licencias_empresa, 200);
     }
 
@@ -59,9 +59,9 @@ class LicenciaEmpresaController extends Controller
      * @param  \App\Models\LicenciaEmpresa  $licenciaEmpresa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LicenciaEmpresa $licenciaEmpresa)
+    public function destroy(LicenciaEmpresa $captura)
     {
-        $licenciaEmpresa->delete();
+        $captura->delete();
         return response()->json(['message' => 'Se ha eliminado una licencia'], 200);
     }
 
