@@ -21,7 +21,7 @@ class BitacoraDetallesController extends Controller
 
     public function index(Request $request)
     {
-        $bitacoras = BitacoraDetalles::paginate(12);
+        $bitacoras = BitacoraDetalles::paginate(7);
         return response()->json($bitacoras, 200);
     }
 
