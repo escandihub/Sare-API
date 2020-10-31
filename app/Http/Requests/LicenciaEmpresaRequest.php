@@ -34,7 +34,7 @@ class LicenciaEmpresaRequest extends FormRequest
 
             'Mes' => ['required'],
             'Year' => ['required'],
-            'IdUsuario' => ['required'],
+            // 'IdUsuario' => ['required'],
             'MesConcluido' => ['required'],
             // 'Rango' => ['required'],
         ];

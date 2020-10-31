@@ -33,7 +33,7 @@ class LicenciaEmpresaController extends Controller
      */
     public function store(LicenciaEmpresaRequest $request)
     {
-        
+        $usuario = $request->IdUsuario = 5;
         LicenciaEmpresa::create($request->all());
         return response()->json(['message' => 'Registro agregado'], 201);
     }
