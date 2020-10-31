@@ -72,10 +72,10 @@ class LicenciaEmpresaController extends Controller
      */
 
     public function rangoFecha(Request $request){
-        $dataInicial = Date($request->fechaIncial);
-        $dataFinal = Date($request->fechaFinal);
-
-        $lista = LicenciaEmpresa::whereBetween('FechaCreacion', [$dataInicial, $dataFinal])->get();
+        $dataInicial = Date($request->fecha_inicio);
+        $dataFinal = Date($request->fecha_fin);
+        
+        $lista = LicenciaEmpresa::whereBetween('FechaCreacion', [$dataInicial, $dataFinal])->paginate(10);
 
         return response()->json($lista, 200);
   }
