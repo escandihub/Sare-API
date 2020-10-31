@@ -46,9 +46,9 @@ class LicenciaEmpresaController extends Controller
      * @param  \App\Models\LicenciaEmpresa  $licenciaEmpresa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LicenciaEmpresa $licenciaEmpresa)
+    public function update(Request $request, LicenciaEmpresa $captura)
     {
-        $licenciaEmpresa->update($request->all());
+        $captura->update($request->all());
         
         return response()->json(['menssage' => 'Se actualizo una nueva Licencia por Empresa'], 200,);
     }
