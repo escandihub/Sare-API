@@ -19,4 +19,9 @@ class Enlace extends Model
     protected $hidden = [
 
     ];  
+
+    public function usuario()
+    {
+        return $this->belongsTo('App\Models\Usuario');
+    }
 }

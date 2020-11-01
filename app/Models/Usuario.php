@@ -22,4 +22,12 @@ class Usuario extends Model
         'FechaRegistro',
         'FechaModificado'
     ];
+
+    public function enlace(){
+        return $this->hasOne('App\Models\Enlace', 'Id', 'IdEnlace');
+    }
+    public function grupo()
+    {
+        return $this->hasOne('App\Models\Grupo','Id', 'IdGrupo');
+    }
 }
