@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Licencia;
 use Illuminate\Http\Request;
+
 /***
  * Controlador que se relaciona con la entidad totales_licencias
  *  => Indicador general
@@ -47,11 +48,10 @@ class LicenciaController extends Controller
     public function update(Request $request, Licencia $licencia)
     {
         $licencia->update($request->all());
-        
-    return response()->json([
-        'menssage' => 'Actualizacion con exito',
-        'licencia' => $licencia
-    ], 200);
+        return response()->json([
+            'menssage' => 'Actualizacion con exito',
+            'licencia' => $licencia
+        ], 200);
     }
 
     /**
@@ -71,12 +71,13 @@ class LicenciaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function rangoFecha(Request $request){
-           $dataInicial = DateTime($request->fechaIncial);
-           $dataFinal = DateTime($request->fechaFinal);
+    public function rangoFecha(Request $request)
+    {
+        $dataInicial = DateTime($request->fechaIncial);
+        $dataFinal = DateTime($request->fechaFinal);
 
-           $lista = Licencia::whereBetween('FechaCreacion', [$dataInicial, $dataFinal]);
+        $lista = Licencia::whereBetween('FechaCreacion', [$dataInicial, $dataFinal]);
 
-           return response()->json($lista, 200);
-     }
+        return response()->json($lista, 200);
+    }
 }

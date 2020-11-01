@@ -17,8 +17,7 @@ class Licencia extends Model
     const CREATED_AT = 'FechaCreacion';
     const UPDATED_AT = 'FechaActualizacion';
 
-    protected $fillable = [
-        'IdTotal',
+    protected $fillable = [        
         'Licencias_Emitidas',
         'Empleos_Generados',
         'Inversion_Generada',
@@ -30,12 +29,16 @@ class Licencia extends Model
         'MesConcluido',
         'Rango'
     ];
-    
-
-    public function municipio(){
+    protected $hidden = [
+        // 'IdTotal'
+    ];
+   
+    public function municipio()
+    {
         return $this->hasOne('App\Models\Enlace', 'Id', 'IdEnlaceMunicipal');
     }
-    public function usuario(){
+    public function usuario()
+    {
         return $this->hasOne('App\Models\Usuario', 'Id', 'IdUsuario');
     }
 }
