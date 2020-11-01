@@ -34,7 +34,7 @@ class LicenciaController extends Controller
     {
         $indicador = Licencia::create($request->all());
 
-        return response()->json(["message" => "Se ha agreado un Nuevo indicador"], 200);
+        return response()->json(["message" => "Se ha agreado un Nuevo indicador"], 201);
     }
 
 
@@ -68,15 +68,15 @@ class LicenciaController extends Controller
 
     /**
      * Consulta de entre dos fechas fechas 
+     * @request year-month-day
      * @return \Illuminate\Http\Response
      */
 
-    public function rangoFecha(Request $request)
-    {
-        $dataInicial = DateTime($request->fechaIncial);
-        $dataFinal = DateTime($request->fechaFinal);
+     public function rangoFecha(Request $request){
+           $dataInicial =  Date($request->fechaIncial);
+           $dataFinal =  Date($request->fechaFinal);
 
-        $lista = Licencia::whereBetween('FechaCreacion', [$dataInicial, $dataFinal]);
+           $lista = Licencia::whereBetween('FechaCreacion', [$dataInicial, $dataFinal])->get();
 
         return response()->json($lista, 200);
     }

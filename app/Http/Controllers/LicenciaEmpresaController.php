@@ -21,7 +21,7 @@ class LicenciaEmpresaController extends Controller
     public function index()
     {
         $fecha = date('Y');
-        $licencias_empresa = LicenciaEmpresa::where('Year', '=', $fecha)->get();
+        $licencias_empresa = LicenciaEmpresa::where('Year', '=', $fecha)->paginate(10);
         return response()->json($licencias_empresa, 200);
     }
 
@@ -33,7 +33,7 @@ class LicenciaEmpresaController extends Controller
      */
     public function store(LicenciaEmpresaRequest $request)
     {
-        
+        $usuario = $request->IdUsuario = 5;
         LicenciaEmpresa::create($request->all());
         return response()->json(['message' => 'Registro agregado'], 201);
     }
@@ -46,11 +46,11 @@ class LicenciaEmpresaController extends Controller
      * @param  \App\Models\LicenciaEmpresa  $licenciaEmpresa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LicenciaEmpresa $licenciaEmpresa)
+    public function update(Request $request, LicenciaEmpresa $captura)
     {
-        $licenciaEmpresa->update($request->all());
+        $captura->update($request->all());
         
-        return response()->json(['menssage' => 'Se actualizo una nueva Licencia por Empresa'], 200,);
+        return response()->json(['message' => 'Se actualizo una nueva Licencia por Empresa'], 200,);
     }
 
     /**
@@ -59,22 +59,23 @@ class LicenciaEmpresaController extends Controller
      * @param  \App\Models\LicenciaEmpresa  $licenciaEmpresa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LicenciaEmpresa $licenciaEmpresa)
+    public function destroy(LicenciaEmpresa $captura)
     {
-        $licenciaEmpresa->delete();
+        $captura->delete();
         return response()->json(['message' => 'Se ha eliminado una licencia'], 200);
     }
 
     /**
      * Consulta de entre dos fechas fechas 
+     * @request year-month-day
      * @return \Illuminate\Http\Response
      */
 
     public function rangoFecha(Request $request){
-        $dataInicial = DateTime($request->fechaIncial);
-        $dataFinal = DateTime($request->fechaFinal);
-
-        $lista = LicenciaEmpresa::whereBetween('FechaCreacion', [$dataInicial, $dataFinal]);
+        $dataInicial = Date($request->fecha_inicio);
+        $dataFinal = Date($request->fecha_fin);
+        
+        $lista = LicenciaEmpresa::whereBetween('FechaCreacion', [$dataInicial, $dataFinal])->paginate(10);
 
         return response()->json($lista, 200);
   }

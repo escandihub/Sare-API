@@ -17,7 +17,7 @@ class Licencia extends Model
     const CREATED_AT = 'FechaCreacion';
     const UPDATED_AT = 'FechaActualizacion';
 
-    protected $fillable = [        
+    protected $fillable = [
         'Licencias_Emitidas',
         'Empleos_Generados',
         'Inversion_Generada',
