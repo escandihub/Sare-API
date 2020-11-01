@@ -22,4 +22,9 @@ class Grupo extends Model
     protected $hidden = [
         
     ];
+
+    public function usuario()
+    {
+        return $this->belongsTo('App\Models\Usuario');
+    }
 }
