@@ -11,18 +11,21 @@ class Usuario extends Model
     protected $table = 'catalogousuarios';
     protected $primaryKey = 'Id';
 
+    const CREATED_AT = 'FechaRegistro';
+    const UPDATED_AT = 'FechaModificado';
+
     protected $fillable = [
         'Usuario',
-        'Password',
         'Nombre',
         'IdEnlace',
         'IdGrupo',
         'Status',
         'Nivel',
-        'FechaRegistro',
-        'FechaModificado'
     ];
 
+    protected $hidden = [
+        'Password'
+    ];
     public function enlace(){
         return $this->hasOne('App\Models\Enlace', 'Id', 'IdEnlace');
     }
