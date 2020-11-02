@@ -24,7 +24,7 @@ class UsuarioRequest extends FormRequest
     public function rules()
     {
         
-            if ($this->getMethod() === 'PUT') {
+            // if ($this->getMethod() === 'PUT') {
                return [ 
                    'Usuario' => ['required'],
                     'Nombre' => ['required'],
@@ -33,7 +33,7 @@ class UsuarioRequest extends FormRequest
                     'Status' => ['required'],
                     'Nivel' => ['required'],
                ];
-            }
+            // }
         
     }
 }

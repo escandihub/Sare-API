@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\UsuarioRequest;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 
@@ -25,11 +25,11 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UsuarioRequest $request)
     {
-        Usuario::create($request->all());
+        $usuario = Usuario::create($request->all());
         
-        return response()->json(['menssage' => "Se ha agregado un nuevo usuario"], 200);
+        return response()->json(['menssage' => "Se ha agregado un nuevo usuario", "usuario" => $usuario], 200);
     }
 
     /**
@@ -51,7 +51,7 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(UsuarioRequest $request, Usuario $usuario)
     {
         $usuario->update($request->all());
         return response()->json(['message' => 'Se ha actualizado el usuario'], 200);
