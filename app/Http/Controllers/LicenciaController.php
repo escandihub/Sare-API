@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Licencia;
 use Illuminate\Http\Request;
+use App\Http\Requests\LicenciaRequest;
 /***
  * Controlador que se relaciona con la entidad totales_licencias
  *  => Indicador general
@@ -18,7 +19,7 @@ class LicenciaController extends Controller
     public function index()
     {
         $fecha = date('Y');
-        $licencias = Licencia::where('Year', '=', $fecha)->with('municipio')->get();
+        $licencias = Licencia::where('Year', '=', $fecha)->with('municipio')->paginate(12);
         return response()->json($licencias, 200);
     }
 
@@ -29,9 +30,14 @@ class LicenciaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LicenciaRequest $request)
     {
-        $indicador = Licencia::create($request->all());
+        // $request->municipio 
+        // $request->month 
+         $indicador = Licencia::create($request->all());
+         $indicador->IdUsuario = 5;
+         $indicador->MesConcluido = 0;
+         $indicador->save();
 
         return response()->json(["message" => "Se ha agreado un Nuevo indicador"], 201);
     }

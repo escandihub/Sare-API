@@ -23,11 +23,11 @@ class Licencia extends Model
         'Inversion_Generada',
         'No_Asesorias',
         'IdEnlaceMunicipal',
-        'IdUsuario',
+        // 'IdUsuario',
         'Mes',
         'Year',
-        'MesConcluido',
-        'Rango'
+        // 'MesConcluido',
+        // 'Rango'
     ];
     
 
