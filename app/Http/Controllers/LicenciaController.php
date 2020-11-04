@@ -50,13 +50,12 @@ class LicenciaController extends Controller
      * @param  \App\Models\Licencia  $licencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Licencia $licencia)
+    public function update(LicenciaRequest $request, Licencia $licencia)
     {
         $licencia->update($request->all());
         
     return response()->json([
-        'menssage' => 'Actualizacion con exito',
-        'licencia' => $licencia
+        'menssage' => 'Actualizacion con exito'
     ], 200);
     }
 
