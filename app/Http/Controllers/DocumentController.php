@@ -10,7 +10,7 @@ use App\Http\Requests\DocumentRequest;
 
 class DocumentController extends Controller
 {
-    public function  store(Request $request) {
+    public function  store(DocumentRequest $request) {
         // return response()->json(['archivo' =>  $request->all()], 200);
         if($files = $request->file('file')){
             $enlace_municipal = Enlace::find(21);
