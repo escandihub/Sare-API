@@ -33,7 +33,7 @@ class GrupoRequest extends FormRequest
             return [
                 'Grupo' => ['required','unique:catalogogrupos,Grupo,'.$this->grupo->Id],
                 'Descripcion' => ['required'],
-                'Status' => ['required','numeric','min:1','max:2'],
+                'Status' => ['required','numeric','min:0','max:1'],
             ];
         }
     }
