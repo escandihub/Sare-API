@@ -11,6 +11,7 @@ use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\LicenciaEmpresaController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\DocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,8 @@ Route::get('bitacora_all',[BitacoraDetallesController::class,'index']);
 Route::get('licencias_fechas',[LicenciaController::class,'rangoFecha']);
 Route::get('capturas_fechas',[LicenciaEmpresaController::class,'rangoFecha']);
 
+//Upload a file 
+Route::post('upload_file', [DocumentController::class, 'store']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

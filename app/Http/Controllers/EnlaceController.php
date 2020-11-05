@@ -27,8 +27,8 @@ class EnlaceController extends Controller
      */
     public function store(EnlaceRequest $request)
     {
-        Enlace::create($request->all());
-        return response()->json(['message'=>'Enlace registrado'], 201);
+        $enlace = Enlace::create($request->all());
+        return response()->json(['message'=>'Enlace registrado', "enlace" => $enlace], 201);
     }
 
     /**

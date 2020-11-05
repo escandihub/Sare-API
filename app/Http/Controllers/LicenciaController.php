@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Licencia;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 
+=======
+use App\Http\Requests\LicenciaRequest;
+>>>>>>> 9ebe873fad71b45e663a92304c3ae0acc19daa6a
 /***
  * Controlador que se relaciona con la entidad totales_licencias
  *  => Indicador general
@@ -19,7 +23,7 @@ class LicenciaController extends Controller
     public function index()
     {
         $fecha = date('Y');
-        $licencias = Licencia::where('Year', '=', $fecha)->with('municipio')->get();
+        $licencias = Licencia::where('Year', '=', $fecha)->with('municipio')->paginate(12);
         return response()->json($licencias, 200);
     }
 
@@ -30,9 +34,14 @@ class LicenciaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LicenciaRequest $request)
     {
-        $indicador = Licencia::create($request->all());
+        // $request->municipio 
+        // $request->month 
+         $indicador = Licencia::create($request->all());
+         $indicador->IdUsuario = 5;
+         $indicador->MesConcluido = 0;
+         $indicador->save();
 
         return response()->json(["message" => "Se ha agreado un Nuevo indicador"], 201);
     }
@@ -45,13 +54,20 @@ class LicenciaController extends Controller
      * @param  \App\Models\Licencia  $licencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Licencia $licencia)
+    public function update(LicenciaRequest $request, Licencia $licencia)
     {
         $licencia->update($request->all());
+<<<<<<< HEAD
         return response()->json([
             'menssage' => 'Actualizacion con exito',
             'licencia' => $licencia
         ], 200);
+=======
+        
+    return response()->json([
+        'menssage' => 'Actualizacion con exito'
+    ], 200);
+>>>>>>> 9ebe873fad71b45e663a92304c3ae0acc19daa6a
     }
 
     /**

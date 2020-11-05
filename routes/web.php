@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\SinglePageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,10 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
-
-Route::get('/about', function () {
-    return view('pages.about');
-});
+Route::get('/{any}',[SinglePageController::class,'index'])->where('any', '.*');
