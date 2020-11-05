@@ -12,6 +12,8 @@ use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\LicenciaEmpresaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\Authenticate\AuthController;
+use App\Http\Controllers\Authenticate\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +43,8 @@ Route::get('capturas_fechas',[LicenciaEmpresaController::class,'rangoFecha']);
 Route::post('upload_file', [DocumentController::class, 'store']);
 
 //Authentication 
-
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('register', [RegisterController::class, 'register']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
