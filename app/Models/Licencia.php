@@ -29,12 +29,16 @@ class Licencia extends Model
         // 'MesConcluido',
         // 'Rango'
     ];
-    
-
-    public function municipio(){
+    protected $hidden = [
+        // 'IdTotal'
+    ];
+   
+    public function municipio()
+    {
         return $this->hasOne('App\Models\Enlace', 'Id', 'IdEnlaceMunicipal');
     }
-    public function usuario(){
+    public function usuario()
+    {
         return $this->hasOne('App\Models\Usuario', 'Id', 'IdUsuario');
     }
 }
