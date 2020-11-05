@@ -39,6 +39,9 @@ Route::get('capturas_fechas',[LicenciaEmpresaController::class,'rangoFecha']);
 
 //Upload a file 
 Route::post('upload_file', [DocumentController::class, 'store']);
+
+//Authentication 
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
