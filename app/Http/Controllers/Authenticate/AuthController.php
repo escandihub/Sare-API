@@ -13,22 +13,17 @@ class AuthController extends Controller
     //
     public function login(Request $request)
     {
-
-        $input = $request->only('Usuario', 'Password');
-        $jwt_token = null;
-        if (!$jwt_token = Auth::attempt($input)) {
-            
+        $input = $request->only('email', 'password');
+        
+        if (Auth::attempt($input)) {
             return  response()->json([
-                'titulo' => 'Credenciales invalidas',
-                'message' => 'Correo o contraseña no válidos.',
-            ], 404);
-        }
-
+                'profile' => Auth::user()
+            ]);
+        }        
         return  response()->json([
-            'token' => $jwt_token,
-            'profile' => Auth::user()
-        ]);
-    
+            'titulo' => 'Credenciales invalidas',
+            'message' => 'Correo o contraseña no válidos.',
+        ], 404);
 
     }
 }
