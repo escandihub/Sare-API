@@ -43,9 +43,9 @@ Route::get('capturas_fechas',[LicenciaEmpresaController::class,'rangoFecha']);
 Route::post('upload_file', [DocumentController::class, 'store']);
 
 //Authentication 
-
+Route::post('login', [AuthController::class, 'login']); 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('/login', [AuthController::class, 'login']); 
+    
     Route::post('register', [RegisterController::class, 'register']);
 });
 
