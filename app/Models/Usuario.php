@@ -18,7 +18,7 @@ class Usuario extends Authenticatable
     const UPDATED_AT = 'FechaModificado';
 
     protected $fillable = [
-        'Usuario',
+        'usuario',
         'Nombre',
         'IdEnlace',
         'IdGrupo',
@@ -27,7 +27,7 @@ class Usuario extends Authenticatable
     ];
 
     protected $hidden = [
-        'Password'
+        'password'
     ];
     public function enlace(){
         return $this->hasOne('App\Models\Enlace', 'Id', 'IdEnlace');
