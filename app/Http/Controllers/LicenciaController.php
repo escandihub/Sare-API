@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Licencia;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-
-=======
 use App\Http\Requests\LicenciaRequest;
->>>>>>> 9ebe873fad71b45e663a92304c3ae0acc19daa6a
 /***
  * Controlador que se relaciona con la entidad totales_licencias
  *  => Indicador general
@@ -57,17 +53,10 @@ class LicenciaController extends Controller
     public function update(LicenciaRequest $request, Licencia $licencia)
     {
         $licencia->update($request->all());
-<<<<<<< HEAD
         return response()->json([
             'menssage' => 'Actualizacion con exito',
             'licencia' => $licencia
         ], 200);
-=======
-        
-    return response()->json([
-        'menssage' => 'Actualizacion con exito'
-    ], 200);
->>>>>>> 9ebe873fad71b45e663a92304c3ae0acc19daa6a
     }
 
     /**
