@@ -13,7 +13,7 @@ class AuthController extends Controller
     //
     public function login(Request $request)
     {
-        $input = $request->only('email', 'password');
+        $input = $request->only('usuario', 'password');
         
         if (Auth::attempt($input)) {
             return  response()->json([
