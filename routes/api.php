@@ -13,6 +13,7 @@ use App\Http\Controllers\LicenciaEmpresaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\DocumentController;
 
+use App\Http\Controllers\Authenticate\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,22 +24,31 @@ use App\Http\Controllers\DocumentController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::apiResource('enlaces', EnlaceController::class);
-Route::apiResource('licencias', LicenciaController::class);
-Route::apiResource('permisos',PermisoController::class);
-Route::apiResource('capturas',LicenciaEmpresaController::class);
-Route::apiResource('usuarios',UsuarioController::class);
-Route::apiResource('grupos',GrupoController::class);
-Route::apiResource('bitacoras',BitacoraController::class);
+Route::group(['middleware' => ['auth:sanctum']], function () {
 
-Route::get('bitacora_detalles',[BitacoraDetallesController::class,'fechas']);
-Route::get('bitacora_all',[BitacoraDetallesController::class,'index']);
+    Route::apiResource('usuarios',UsuarioController::class);
+    Route::apiResource('enlaces', EnlaceController::class);
+    Route::apiResource('licencias', LicenciaController::class);
+    Route::apiResource('permisos',PermisoController::class);
+    Route::apiResource('capturas',LicenciaEmpresaController::class);
+    Route::apiResource('grupos',GrupoController::class);
+    Route::apiResource('bitacoras',BitacoraController::class);
+    
+    Route::get('bitacora_detalles',[BitacoraDetallesController::class,'fechas']);
+    Route::get('bitacora_all',[BitacoraDetallesController::class,'index']);
+    
+    Route::get('licencias_fechas',[LicenciaController::class,'rangoFecha']);
+    Route::get('capturas_fechas',[LicenciaEmpresaController::class,'rangoFecha']);
+    
+    //Upload a file 
+    Route::post('upload_file', [DocumentController::class, 'store']); 
+});
 
-Route::get('licencias_fechas',[LicenciaController::class,'rangoFecha']);
-Route::get('capturas_fechas',[LicenciaEmpresaController::class,'rangoFecha']);
+Route::post('login', [AuthController::class, 'login']);
 
-//Upload a file 
-Route::post('upload_file', [DocumentController::class, 'store']);
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['api']], function () {
+    
+    Route::get('/prueba', function () {
+        return '0';
+    });
 });
