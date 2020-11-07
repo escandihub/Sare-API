@@ -10,19 +10,20 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Usuario extends Authenticatable
 {
     use HasFactory;
-    protected $table = 'catalogousuarios';
-    protected $primaryKey = 'Id';
+    // protected $table = 'catalogousuarios';
+    // protected $primaryKey = 'Id';
 
-    const CREATED_AT = 'FechaRegistro';
-    const UPDATED_AT = 'FechaModificado';
+    // const CREATED_AT = 'FechaRegistro';
+    // const UPDATED_AT = 'FechaModificado';
 
     protected $fillable = [
         'usuario',
-        'Nombre',
-        'IdEnlace',
-        'IdGrupo',
-        'Status',
-        'Nivel',
+        'nombre',
+        'enlace_id',
+        'password',
+        // 'IdGrupo',
+        'status',
+        // 'Nivel',
     ];
 
     protected $hidden = [
@@ -33,6 +34,6 @@ class Usuario extends Authenticatable
     }
     public function grupo()
     {
-        return $this->hasOne('App\Models\Grupo','Id', 'IdGrupo');
+        return $this->belongsToMany('App\Models\Grupo');
     }
 }
