@@ -26,9 +26,9 @@ class Grupo extends Model
 
     public function usuario()
     {
-        return $this->belongsTo('App\Models\Usuario');
+        return $this->belongsToMany('App\Models\Usuario')->withTimesTamps();
     }
     public function permisos(){
-        return $this->belongsToMany('App\Models\Permiso');
+        return $this->belongsToMany('App\Models\Permiso')->withTimesTamps();
     }
 }

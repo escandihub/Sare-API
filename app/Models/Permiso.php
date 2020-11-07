@@ -22,6 +22,6 @@ class Permiso extends Model
 
     public function grupo()
     {
-        return $this->belongsToMany('App\Models\Grupo');
+        return $this->belongsToMany('App\Models\Grupo')->withTimesTamps();
     }
 }
