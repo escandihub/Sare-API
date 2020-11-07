@@ -12,6 +12,8 @@ use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\LicenciaEmpresaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\Authenticate\AuthController;
+use App\Http\Controllers\Authenticate\RegisterController;
 
 use App\Http\Controllers\Authenticate\AuthController;
 /*
@@ -46,9 +48,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 Route::post('login', [AuthController::class, 'login']);
 
+
 Route::group(['middleware' => ['api']], function () {
     
     Route::get('/prueba', function () {
         return '0';
     });
-});
+
