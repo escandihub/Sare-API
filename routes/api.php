@@ -15,7 +15,6 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\Authenticate\AuthController;
 use App\Http\Controllers\Authenticate\RegisterController;
 
-use App\Http\Controllers\Authenticate\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
