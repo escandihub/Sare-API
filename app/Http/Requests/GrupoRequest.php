@@ -31,9 +31,9 @@ class GrupoRequest extends FormRequest
             ];
         } else if($this->getMethod() === 'PUT'){
             return [
-                'Grupo' => ['required','unique:catalogogrupos,Grupo,'.$this->grupo->Id],
-                'Descripcion' => ['required'],
-                'Status' => ['required','numeric','min:0','max:1'],
+                'nombre' => ['required','unique:catalogogrupos,Grupo,'.$this->grupo->id],
+                'descripcion' => ['required'],
+                // 'Status' => ['required','numeric','min:0','max:1'],
             ];
         }
     }
