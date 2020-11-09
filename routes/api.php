@@ -15,6 +15,10 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\Authenticate\AuthController;
 use App\Http\Controllers\Authenticate\RegisterController;
 
+use App\Models\Usuario;
+use App\Models\Permiso;
+use App\Models\Grupo;
+use Illuminate\Support\Facades\Gate;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -54,3 +58,24 @@ Route::group(['middleware' => ['api']], function () {
         return '0';
     });
 });
+
+
+Route::get('/test', function () {
+
+    //   $grupo =  Grupo::find(1);
+    //   $grupo->permisos()->sync([1,2]);
+    //   return $grupo->permisos;
+    // $usuario = Usuario::find(1);
+    // return $usuario->tienePermiso;
+    // $usuario = Usuario::with('grupo')->orderBy('id', 'Desc')->get();
+    
+    // $usuario = Usuario::find(1);
+    // $valor =  $usuario->tienePermiso('usuario.update');
+    
+    Gate::authorize('tiene-acceso', 'usuario.update');
+    
+    // return $usuario->grupo()->permisos;
+    // return $usuario->tienePermiso('usuario.index');
+        
+    
+    });
