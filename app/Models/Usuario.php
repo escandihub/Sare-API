@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Models\Traits\UsuarioTrait;
+
 class Usuario extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, UsuarioTrait;
     // protected $table = 'catalogousuarios';
     // protected $primaryKey = 'Id';
 
@@ -29,11 +31,4 @@ class Usuario extends Authenticatable
     protected $hidden = [
         'password'
     ];
-    public function enlace(){
-        return $this->hasOne('App\Models\Enlace', 'Id', 'IdEnlace');
-    }
-    public function grupo()
-    {
-        return $this->belongsToMany('App\Models\Grupo');
-    }
 }
