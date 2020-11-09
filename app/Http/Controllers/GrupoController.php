@@ -44,7 +44,8 @@ class GrupoController extends Controller
      */
     public function show($id)
     {
-        
+        $permisos = Grupo::find($id)->permisos;
+        return response()->json($permisos, 200);
     }
 
     /**
@@ -57,6 +58,7 @@ class GrupoController extends Controller
     public function update(GrupoRequest $request, Grupo $grupo)
     {
         $grupo->update($request->all());
+        $grupo->permisos()->sync($request->privilegios);
         return response()->json(['message'=>'Grupo actualizado'], 200);
     }
 
