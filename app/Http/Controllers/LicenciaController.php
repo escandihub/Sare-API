@@ -19,7 +19,7 @@ class LicenciaController extends Controller
     public function index()
     {
         $fecha = date('Y');
-        $licencias = Licencia::where('Year', '=', $fecha)->with('municipio')->paginate(12);
+        $licencias = Licencia::where('Year', '=', $fecha)->with('municipio')->orderBy('FechaCreacion', 'desc')->paginate(12);
         return response()->json($licencias, 200);
     }
 
