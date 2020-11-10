@@ -4,15 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LicenciaEmpresaRequest;
 use App\Models\LicenciaEmpresa;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 /**
  * GET
  * POST
  * UPDATE
  * ELIMIT
  */
+/***
+ * Controlador que se relaciona con la entidad licencia_empresa
+ *  => Licencias por empresa
+ */
 class LicenciaEmpresaController extends Controller
 {
+    public function __construct()
+    {
+			$this->authorizeResource(LicenciaEmpresa::class, 'create');
+			$this->authorizeResource(LicenciaEmpresa::class, 'viewAny');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +33,7 @@ class LicenciaEmpresaController extends Controller
     public function index()
     {
         $fecha = date('Y');
-        $licencias_empresa = LicenciaEmpresa::where('Year', '=', $fecha)->paginate(10);
+        $licencias_empresa = LicenciaEmpresa::where('Year', '=', $fecha)->orderBy('FechaCreacion', 'desc')->paginate(10);
         return response()->json($licencias_empresa, 200);
     }
 
