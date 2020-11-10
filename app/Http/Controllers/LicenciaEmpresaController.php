@@ -27,13 +27,18 @@ class LicenciaEmpresaController extends Controller
     }
     /**
      * Display a listing of the resource.
-     *
+     * @Auth  {Ususario} checa si pertenece a algun municipio
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $fecha = date('Y');
-        $licencias_empresa = LicenciaEmpresa::where('Year', '=', $fecha)->orderBy('FechaCreacion', 'desc')->paginate(10);
+        if(Auth::user()->hasMunicipio()){
+            $licencias_empresa = LicenciaEmpresa::where('IdEnlaceMunicipal', '=', Auth::user()->enlace->id)->orderBy('FechaCreacion', 'desc')->paginate(10);
+        }else{
+            $licencias_empresa = LicenciaEmpresa::where('Year', '=', $fecha)->orderBy('FechaCreacion', 'desc')->paginate(10);					
+        }
+           
         return response()->json($licencias_empresa, 200);
     }
 
