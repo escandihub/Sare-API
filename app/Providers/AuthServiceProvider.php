@@ -6,6 +6,9 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use App\Models\Usuario;
 
+use App\Models\LicenciaEmpresa;
+use App\Policies\LicenciaPorEmpresaPolicy;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -14,7 +17,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+				// 'App\Models\Model' => 'App\Policies\ModelPolicy',
+				LicenciaEmpresa::class => LicenciaPorEmpresaPolicy::class,
     ];
 
     /**
@@ -26,8 +30,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('tiene-acceso', function (Usuario $user, $param) {
-            return $user->tienePermiso($param);
-        });
+        // Gate::define('tiene-acceso', function (Usuario $user, $param) {
+            // return $user->tienePermiso($param);
+        // });
     }
 }
