@@ -5,7 +5,7 @@ namespace App\Models\Traits;
 trait UsuarioTrait {
   
   public function enlace(){
-    return $this->hasOne('App\Models\Enlace', 'Id', 'IdEnlace');
+    return $this->hasOne('App\Models\Enlace', 'id', 'enlace_id');
 }
 public function grupo(){
     return $this->belongsToMany('App\Models\Grupo');
@@ -17,11 +17,20 @@ public function grupo(){
             return true; //full access to the API
         }
         foreach ($grupo->permisos as $permiso) {
-            if ($permiso->slug === $perm) {
+            if ($permiso->slug === $perm) { // checking if the user can do something
                 return true;
             }
         }
     }
     return false;
+}
+
+public function hasMunicipio(){
+	$enlace = $this->enlace;
+    if(!is_null($enlace)){
+        return true;
+    }else{
+        return false;
+    }
 }
 }
