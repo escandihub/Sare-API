@@ -22,8 +22,10 @@ class LicenciaEmpresaController extends Controller
 {
     public function __construct()
     {
-			$this->authorizeResource(LicenciaEmpresa::class, 'create');
-			$this->authorizeResource(LicenciaEmpresa::class, 'viewAny');
+			// $this->authorizeResource(LicenciaEmpresa::class, 'create');
+			// $this->authorizeResource(LicenciaEmpresa::class, 'update');
+			// $this->authorizeResource(LicenciaEmpresa::class, 'delete');
+			// $this->authorizeResource(LicenciaEmpresa::class, 'viewAny');
     }
     /**
      * Display a listing of the resource.
