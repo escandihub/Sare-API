@@ -30,23 +30,26 @@ trait BicatoraEventoLogger {
 		// \Log::info("detalles: " . $model);
 		// \Log::info("reflect: " . $reflect);
 
-		\Log::info('user_id: '     .  $user_id);
-		\Log::info('contentId: '   .  $model->id);
-		\Log::info('contentType: ' .  get_class($model));
-		\Log::info('action: '      .  static::getActionName($eventName));
-		\Log::info('description: ' .  ucfirst($eventName) . " a " . $reflect->getShortName());
-		\Log::info('details: '     .  json_encode($model->getDirty()));
+		// \Log::info('user_id: '     .  $user_id);
+		// \Log::info('contentId: '   .  $model->id);
+		// \Log::info('contentType: ' .  get_class($model));
+		// \Log::info('action: '      .  static::getActionName($eventName));
+		// \Log::info('description: ' .  ucfirst($eventName) . " a " . $reflect->getShortName());
+		// \Log::info('details: '     .  json_encode($model->getDirty()));
 
+		$descripcion = ucfirst($eventName) . " a " . $reflect->getShortName();
+		$tipo_operacion_id = static::getActionName($eventName);
 		$log = [
-		  'IdUsuario'=> $user_id,
-		  'descripcion' => $eventName,
-		  "referencia" => ucfirst($eventName) . " a " . $reflect->getShortName(),
-		  "entidad" => $reflect->getShortName(),
-		  'fecha' => Carbon::now(),
+			'IdUsuario'=> $user_id,
+			"entidad" =>  get_class($model),
+			"referencia" =>  $model->id,
+			"descripcion" => $descripcion,
+			"IdTipo" => intval($tipo_operacion_id),
+			'fecha' => Carbon::now(),
 		  
 		  
-		];          
-		// Bitacora::create($log);
+		];    
+		Bitacora::create($log);
 	  });
 	}    
   }    
@@ -67,13 +70,13 @@ trait BicatoraEventoLogger {
     {
         switch (strtolower($event)) {
             case 'created':
-                return 'Creacion';
+                return 2; //'Creacion';
                 break;
             case 'updated':
-                return 'Actualizacion';
+                return 3; //'Actualizacion';
                 break;
             case 'deleted':
-                return 'Eliminacion';
+                return 4; //'Eliminacion';
                 break;
             default:
                 return 'Desconocido';
