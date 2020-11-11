@@ -8,11 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Bitacora extends Model
 {
     use HasFactory;
-    protected $table = 'catalogobitacora';
-    protected $primaryKey = 'IdTipo';
+    protected $table = 'bitacora';
     public $timestamps = false;
     protected $fillable = [
-        'TipoMovimiento'
+        "IdUsuario",
+        "IdTipo",
+        "descripcion",
+        "referencia",
+        "fecha",
+        "entidad"
     ];
     protected $hidden = [
 
