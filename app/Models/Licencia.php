@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Traits\BicatoraEventoLogger;
+
 class Licencia extends Model
 {
     /**
      * Modelo que se relaciona a la entidad total_licencias 
      */
-    use HasFactory;
+    use HasFactory, BicatoraEventoLogger;
     protected $table = 'totales_licencias';
-    protected $primaryKey = 'IdTotal';
 
     const CREATED_AT = 'FechaCreacion';
     const UPDATED_AT = 'FechaActualizacion';
@@ -35,10 +36,10 @@ class Licencia extends Model
    
     public function municipio()
     {
-        return $this->hasOne('App\Models\Enlace', 'Id', 'IdEnlaceMunicipal');
+        return $this->hasOne('App\Models\Enlace', 'id', 'IdEnlaceMunicipal');
     }
     public function usuario()
     {
-        return $this->hasOne('App\Models\Usuario', 'Id', 'IdUsuario');
+        return $this->hasOne('App\Models\Usuario', 'id', 'IdUsuario');
     }
 }

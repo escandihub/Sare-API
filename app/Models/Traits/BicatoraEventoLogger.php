@@ -23,12 +23,20 @@ trait BicatoraEventoLogger {
 
 	  static::$eventName(function (Model $model) use ($user_id, $eventName) {
 		$reflect = new \ReflectionClass($model);
-		\Log::info('Evento : ' . $eventName);
-		\Log::info('Usuario : ' . $user_id);
-		\Log::info('Modelo : ' . get_class($model));
-		\Log::info('reflection : ' . ucfirst($eventName) . " a " . $reflect->getShortName());
-		\Log::info("detalles: " . $model);
-		\Log::info("reflect: " . $reflect);
+		// \Log::info('Evento : ' . $eventName);
+		// \Log::info('Usuario : ' . $user_id);
+		// \Log::info('Modelo : ' . get_class($model));
+		// \Log::info('reflection : ' . ucfirst($eventName) . " a " . $reflect->getShortName());
+		// \Log::info("detalles: " . $model);
+		// \Log::info("reflect: " . $reflect);
+
+		\Log::info('user_id: '     .  $user_id);
+		\Log::info('contentId: '   .  $model->id);
+		\Log::info('contentType: ' .  get_class($model));
+		\Log::info('action: '      .  static::getActionName($eventName));
+		\Log::info('description: ' .  ucfirst($eventName) . " a " . $reflect->getShortName());
+		\Log::info('details: '     .  json_encode($model->getDirty()));
+
 		$log = [
 		  'IdUsuario'=> $user_id,
 		  'descripcion' => $eventName,
@@ -38,7 +46,7 @@ trait BicatoraEventoLogger {
 		  
 		  
 		];          
-		Bitacora::create($log);
+		// Bitacora::create($log);
 	  });
 	}    
   }    
@@ -54,6 +62,22 @@ trait BicatoraEventoLogger {
 	  'updated',
 	  'deleted',
 	];
-  }
+	}
+	protected static function getActionName($event)
+    {
+        switch (strtolower($event)) {
+            case 'created':
+                return 'Creacion';
+                break;
+            case 'updated':
+                return 'Actualizacion';
+                break;
+            case 'deleted':
+                return 'Eliminacion';
+                break;
+            default:
+                return 'Desconocido';
+        }
+    }
 
 }

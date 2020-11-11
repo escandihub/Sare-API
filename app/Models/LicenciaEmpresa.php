@@ -12,7 +12,6 @@ class LicenciaEmpresa extends Model
 {
     use HasFactory, BicatoraEventoLogger;
     protected $table = 'licencias_empresa';
-    protected $primaryKey = 'IdLicencia';
 
     const CREATED_AT = 'FechaCreacion';
     const UPDATED_AT = 'FechaActualizacion';
