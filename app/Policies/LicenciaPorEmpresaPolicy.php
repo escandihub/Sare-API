@@ -43,7 +43,7 @@ class LicenciaPorEmpresaPolicy
      */
     public function create(Usuario $usuario)
     {
-        return $usuario->id == 0
+        return $usuario->id > 0
         ? Response::allow()
         : Response::deny('Prueba nadie tiene acceso ' . $usuario->nombre);
     }
@@ -57,7 +57,7 @@ class LicenciaPorEmpresaPolicy
      */
     public function update(Usuario $usuario, LicenciaEmpresa $licenciaEmpresa)
     {
-        //
+        return $usuario->id > 0;
     }
 
     /**
@@ -69,7 +69,7 @@ class LicenciaPorEmpresaPolicy
      */
     public function delete(Usuario $usuario, LicenciaEmpresa $licenciaEmpresa)
     {
-        //
+        return $usuario->id > 0;
     }
 
     /**
