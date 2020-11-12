@@ -12,11 +12,11 @@ class Bitacora extends Model
     public $timestamps = false;
     protected $fillable = [
         "IdUsuario",
-        "IdTipo",
-        "descripcion",
+        "entidad",
         "referencia",
+        "descripcion",
         "fecha",
-        "entidad"
+        "IdTipo"
     ];
     protected $hidden = [
 
