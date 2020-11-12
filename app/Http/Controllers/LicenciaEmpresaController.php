@@ -8,7 +8,6 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 /**
  * GET
  * POST
@@ -50,6 +49,7 @@ class LicenciaEmpresaController extends Controller
      */
     public function store(LicenciaEmpresaRequest $request)
     {
+        $this->authorize("create");
         $usuario = $request->IdUsuario = 5;
         LicenciaEmpresa::create($request->all());
         return response()->json(['message' => 'Registro agregado'], 201);
@@ -63,9 +63,9 @@ class LicenciaEmpresaController extends Controller
      * @param  \App\Models\LicenciaEmpresa  $licenciaEmpresa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, LicenciaEmpresa $captura)
+    public function update(Request $request, LicenciaEmpresa $captura)
     {
-        Gate::authorize("update", $captura);
+        $this->authorize("update", $captura);
         
         $captura->update($request->all());
         
@@ -80,6 +80,7 @@ class LicenciaEmpresaController extends Controller
      */
     public function destroy(LicenciaEmpresa $captura)
     {
+        $this->authorize("delete", $captura);
         $captura->delete();
         return response()->json(['message' => 'Se ha eliminado una licencia'], 200);
     }
