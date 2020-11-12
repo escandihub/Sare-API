@@ -6,6 +6,7 @@ use App\Http\Requests\LicenciaEmpresaRequest;
 use App\Models\LicenciaEmpresa;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 /**
@@ -22,10 +23,7 @@ class LicenciaEmpresaController extends Controller
 {
     public function __construct()
     {
-			// $this->authorizeResource(LicenciaEmpresa::class, 'create');
-			// $this->authorizeResource(LicenciaEmpresa::class, 'update');
-			// $this->authorizeResource(LicenciaEmpresa::class, 'delete');
-			// $this->authorizeResource(LicenciaEmpresa::class, 'viewAny');
+		// $this->authorizeResource(LicenciaEmpresa::class);
     }
     /**
      * Display a listing of the resource.
@@ -65,8 +63,10 @@ class LicenciaEmpresaController extends Controller
      * @param  \App\Models\LicenciaEmpresa  $licenciaEmpresa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LicenciaEmpresa $captura)
+    public function edit(Request $request, LicenciaEmpresa $captura)
     {
+        Gate::authorize("update", $captura);
+        
         $captura->update($request->all());
         
         return response()->json(['message' => 'Se actualizo una nueva Licencia por Empresa'], 200,);
