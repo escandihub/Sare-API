@@ -20,7 +20,9 @@ class LicenciaPorEmpresaPolicy
      */
     public function viewAny(Usuario $usuario)
     {
-        return $usuario->id > 0;
+        return $usuario->id > 0
+        ? Response::allow()
+        : Response::deny('Privilegios insuficuentes');
     }
 
     /**
@@ -32,7 +34,9 @@ class LicenciaPorEmpresaPolicy
      */
     public function view(Usuario $usuario, LicenciaEmpresa $licenciaEmpresa)
     {
-        //
+        return $usuario->id > 0
+        ? Response::allow()
+        : Response::deny('Privilegios insuficuentes');
     }
 
     /**
@@ -45,7 +49,7 @@ class LicenciaPorEmpresaPolicy
     {
         return $usuario->id > 0
         ? Response::allow()
-        : Response::deny('Prueba nadie tiene acceso ' . $usuario->nombre);
+        : Response::deny('No puede crear Licencias' . $usuario->nombre);
     }
 
     /**
@@ -57,7 +61,9 @@ class LicenciaPorEmpresaPolicy
      */
     public function update(Usuario $usuario, LicenciaEmpresa $licenciaEmpresa)
     {
-        return $usuario->id > 0;
+        return $usuario->id > 0
+        ? Response::allow()
+        : Response::deny('Privilegios insuficientes.');
     }
 
     /**
@@ -69,7 +75,9 @@ class LicenciaPorEmpresaPolicy
      */
     public function delete(Usuario $usuario, LicenciaEmpresa $licenciaEmpresa)
     {
-        return $usuario->id > 0;
+        return $usuario->id > 0
+        ? Response::allow()
+        : Response::deny('Privilegios insuficientes.');
     }
 
     /**
