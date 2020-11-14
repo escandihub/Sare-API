@@ -29,16 +29,28 @@ class LicenciaEmpresaController extends Controller
      * @Auth  {Ususario} checa si pertenece a algun municipio
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $fecha = date('Y');
-        if(Auth::user()->hasMunicipio()){
-            $licencias_empresa = LicenciaEmpresa::where('IdEnlaceMunicipal', '=', Auth::user()->enlace->id)->orderBy('FechaCreacion', 'desc')->paginate(10);
-        }else{
-            $licencias_empresa = LicenciaEmpresa::where('Year', '=', $fecha)->orderBy('FechaCreacion', 'desc')->paginate(10);					
-        }
-           
-        return response()->json($licencias_empresa, 200);
+        $validarFechas = $request->validate([
+            'fecha_inicio' => 'date',
+            'fecha_fin' => 'date',
+        ]);
+        // verificar si en el params se encuntran datos 
+        $dataInicial =  !$validarFechas ? date('Y-01-01') : Date($request->fecha_inicio);
+        $dataFinal =  !$validarFechas ? date('Y-12-31') : Date($request->fecha_fin);
+
+        $licencia_empresa = LicenciaEmpresa::query();
+
+            // if(Auth::user()->hasMunicipio()){
+            if(false){
+                $licencia_empresa->where('IdEnlaceMunicipal', '=', 27); // Auth::user()->enlace->id
+                $licencia_empresa->whereBetween("FechaCreacion",[$dataInicial, $dataFinal]);
+
+            }else{ //super user or admin
+                 $licencia_empresa->whereBetween("FechaCreacion",[$dataInicial, $dataFinal])->orderBy('FechaCreacion', 'desc');
+            }
+            
+        return response()->json($licencia_empresa->paginate(12), 200);
     }
 
     /**
