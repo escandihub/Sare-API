@@ -25,7 +25,7 @@ class GrupoRequest extends FormRequest
     {        
         if($this->getMethod() === 'POST'){
             return [
-                'nombre' => ['required','unique:catalogogrupos,Grupo'],
+                'nombre' => ['required','unique:grupos,nombre'],
                 'descripcion' => ['required'],
                 // 'Status' => ['required','numeric','min:1','max:2'],
             ];
