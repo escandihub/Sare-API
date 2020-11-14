@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\GrupoRequest;
 
 /**
+ * entidad grupos 
  * Agregar
  * 3 => update
  * 
