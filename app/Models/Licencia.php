@@ -12,7 +12,7 @@ class Licencia extends Model
     /**
      * Modelo que se relaciona a la entidad total_licencias 
      */
-    use HasFactory, BicatoraEventoLogger;
+    use HasFactory; //, BicatoraEventoLogger;
     protected $table = 'totales_licencias';
 
     const CREATED_AT = 'FechaCreacion';

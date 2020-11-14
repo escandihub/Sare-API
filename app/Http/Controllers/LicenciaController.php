@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Licencia;
 use Illuminate\Http\Request;
 use App\Http\Requests\LicenciaRequest;
+
+use Illuminate\Database\Eloquent\Builder;
+
 /***
  * Controlador que se relaciona con la entidad totales_licencias
  *  => Indicador general
@@ -19,7 +22,7 @@ class LicenciaController extends Controller
     public function index()
     {
         $fecha = date('Y');
-        $licencias = Licencia::where('Year', '=', $fecha)->with('municipio')->orderBy('FechaCreacion', 'desc')->paginate(12);
+        $licencias = Licencia::where('Year', '=', '2019')->with('municipio')->orderBy('FechaCreacion', 'desc')->paginate(12);
         return response()->json($licencias, 200);
     }
 
@@ -78,11 +81,23 @@ class LicenciaController extends Controller
      */
 
      public function rangoFecha(Request $request){
-           $dataInicial =  Date($request->fechaIncial);
-           $dataFinal =  Date($request->fechaFinal);
+        // return response()->json($request->input('fecha_inicio'), 200);
+           $dataInicial =  Date($request->fecha_inicio);
+           $dataFinal =  Date($request->fecha_fin);
 
-           $lista = Licencia::whereBetween('FechaCreacion', [$dataInicial, $dataFinal])->get();
+           $licenciaTable = Licencia::query();
 
-        return response()->json($lista, 200);
+           if($dataInicial != null && $dataFinal != null);
+            $licenciaTable = $licenciaTable->whereBetween('FechaCreacion',[$dataInicial, $dataFinal]);
+
+            $licencias = $licenciaTable->simplePaginate(10);
+
+            
+        //    return response()->json($request->input("fecha_inicio"), 200);
+
+        //    $lista = Licencia::whereBetween('FechaCreacion', [$dataInicial, $dataFinal])->paginate(10);
+        //    $lista = Licencia::paginate(10);
+
+        
     }
 }

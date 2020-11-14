@@ -91,7 +91,8 @@ class LicenciaEmpresaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function rangoFecha(Request $request){
+    public function porFechas(Request $request){
+    
         $dataInicial = Date($request->fecha_inicio);
         $dataFinal = Date($request->fecha_fin);
         

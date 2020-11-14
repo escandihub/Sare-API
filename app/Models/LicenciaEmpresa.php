@@ -10,7 +10,7 @@ use App\Models\Traits\BitacoraModel;
 
 class LicenciaEmpresa extends Model
 {
-    use HasFactory, BicatoraEventoLogger;
+    use HasFactory;//, BicatoraEventoLogger;
     protected $table = 'licencias_empresa';
 
     const CREATED_AT = 'FechaCreacion';

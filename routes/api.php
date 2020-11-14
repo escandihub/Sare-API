@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::apiResource('usuarios',UsuarioController::class);
     Route::apiResource('enlaces', EnlaceController::class);
-    Route::apiResource('licencias', LicenciaController::class);
+    
     Route::apiResource('permisos',PermisoController::class);
     Route::apiResource('capturas',LicenciaEmpresaController::class);
     Route::apiResource('grupos',GrupoController::class);
@@ -42,8 +42,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('bitacora_detalles',[BitacoraDetallesController::class,'fechas']);
     Route::get('bitacora_all',[BitacoraDetallesController::class,'index']);
     
-    Route::get('licencias_fechas',[LicenciaController::class,'rangoFecha']);
-    Route::get('capturas_fechas',[LicenciaEmpresaController::class,'rangoFecha']);
+
+    
     
     //Upload a file 
     Route::post('upload_file', [DocumentController::class, 'store']); 
@@ -58,20 +58,27 @@ Route::group(['middleware' => ['api']], function () {
         return '0';
     });
 });
-
-
+Route::apiResource('licencias', LicenciaController::class);
+Route::get('licencia/per_dates',[LicenciaController::class,'rangoFecha'])->name('licencias.per-dates');
+Route::get('captura/per_date',[LicenciaEmpresaController::class,'porFechas'])->name("capturas.per-dates");
 Route::get('/test', function () {
 
-    //   $grupo =  Grupo::find(1);
-    //   $grupo->permisos()->sync([1,2]);
+      $grupo =  Grupo::find(1);
+      $grupo->permisos()->sync([1,2]);
+      return '0';
     //   return $grupo->permisos;
     // $usuario = Usuario::find(1);
     // return $usuario->tienePermiso;
     // $usuario = Usuario::with('grupo')->orderBy('id', 'Desc')->get();
     
-    // $usuario = Usuario::find(1);
+     $usuario = Usuario::find(1);
     // $valor =  $usuario->tienePermiso('usuario.update');
-    
+    if($usuario->propietario()){
+        return 'es propietario total';
+    }else{
+        return 'no lo es';
+    }
+    return Usuario::find(1)->propietario('captura.index');
     Gate::authorize('tiene-acceso', 'usuario.update');
     
     // return $usuario->grupo()->permisos;
