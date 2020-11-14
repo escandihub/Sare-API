@@ -90,10 +90,10 @@ class LicenciaController extends Controller
            if($dataInicial != null && $dataFinal != null);
             $licenciaTable = $licenciaTable->whereBetween('FechaCreacion',[$dataInicial, $dataFinal]);
 
-            $licencias = $licenciaTable->simplePaginate(10);
+            $licencias = $licenciaTable->paginate(10);
 
             
-        //    return response()->json($request->input("fecha_inicio"), 200);
+           return response()->json($licencias, 200);
 
         //    $lista = Licencia::whereBetween('FechaCreacion', [$dataInicial, $dataFinal])->paginate(10);
         //    $lista = Licencia::paginate(10);
