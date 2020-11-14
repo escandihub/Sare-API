@@ -19,11 +19,25 @@ class LicenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $fecha = date('Y');
-        $licencias = Licencia::where('Year', '=', '2019')->with('municipio')->orderBy('FechaCreacion', 'desc')->paginate(12);
-        return response()->json($licencias, 200);
+        $validarFechas = $request->validate([
+            'fecha_inicio' => 'date',
+            'fecha_fin' => 'date',
+        ]);
+
+         // verificar si en el params se encuntran datos 
+         $dataInicial =  !$validarFechas ? date('Y-01-01') : Date($request->fecha_inicio);
+         $dataFinal =  !$validarFechas ? date('Y-12-31') : Date($request->fecha_fin);
+
+         $licencia_captura = Licencia::query();
+         if(true){
+            $licencia_captura->where('IdEnlaceMunicipal', '=', 27); // Auth::user()->enlace->id
+            $licencia_captura->whereBetween("FechaCreacion", [$dataInicial, $dataFinal])->orderBy('FechaCreacion', 'desc');
+         }else{
+            $licencia_captura->whereBetween("FechaCreacion", [$dataInicial, $dataFinal])->orderBy('FechaCreacion', 'desc');
+         }
+        return response()->json($licencia_captura->paginate(10), 200);
     }
 
 
@@ -93,7 +107,7 @@ class LicenciaController extends Controller
             $licencias = $licenciaTable->paginate(10);
 
             
-           return response()->json($licencias, 200);
+        return response()->json($licencias, 200);
 
         //    $lista = Licencia::whereBetween('FechaCreacion', [$dataInicial, $dataFinal])->paginate(10);
         //    $lista = Licencia::paginate(10);
