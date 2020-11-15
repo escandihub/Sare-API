@@ -47,9 +47,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     
     //Upload a file 
     Route::post('upload_file', [DocumentController::class, 'store']); 
+
+    
 });
 
 Route::post('login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
 
 
 Route::group(['middleware' => ['api']], function () {
