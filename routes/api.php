@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('enlaces', EnlaceController::class);
     
     Route::apiResource('permisos',PermisoController::class);
-    Route::apiResource('capturas',LicenciaEmpresaController::class);
+    
     Route::apiResource('grupos',GrupoController::class);
     Route::apiResource('bitacoras',BitacoraController::class);
     
@@ -58,6 +58,7 @@ Route::group(['middleware' => ['api']], function () {
         return '0';
     });
 });
+Route::apiResource('capturas',LicenciaEmpresaController::class);
 Route::apiResource('licencias', LicenciaController::class);
 Route::get('licencia/per_dates',[LicenciaController::class,'rangoFecha'])->name('licencias.per-dates');
 Route::get('captura/per_date',[LicenciaEmpresaController::class,'porFechas'])->name("capturas.per-dates");
