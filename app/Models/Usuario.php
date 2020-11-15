@@ -22,9 +22,8 @@ class Usuario extends Authenticatable
         'usuario',
         'nombre',
         'enlace_id',
-        'password',
         // 'IdGrupo',
-        'status',
+        // 'status',
         // 'Nivel',
     ];
 
