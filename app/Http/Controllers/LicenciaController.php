@@ -34,6 +34,7 @@ class LicenciaController extends Controller
 
 		$licencia_captura = Licencia::query();
 		if (true) {
+			//sera el usuario que registre la operacion no deberia ser el municipio del usuario
 			$licencia_captura->where("IdEnlaceMunicipal", "=", 27); // Auth::user()->enlace->id
 			$licencia_captura
 				->whereBetween("FechaCreacion", [$dataInicial, $dataFinal])
