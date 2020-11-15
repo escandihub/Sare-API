@@ -8,7 +8,7 @@ trait UsuarioTrait {
     return $this->hasOne('App\Models\Enlace', 'id', 'enlace_id');
 }
 public function grupo(){
-    return $this->belongsToMany('App\Models\Grupo');
+    return $this->belongsToMany('App\Models\Grupo')->withTimesTamps();
 }
   public function tienePermiso($perm){
     $grupos = $this->grupo;
