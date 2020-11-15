@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\UsuarioRequest;
 use App\Models\Usuario;
+use App\Models\Grupo;
 use Illuminate\Http\Request;
+
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -27,8 +31,17 @@ class UsuarioController extends Controller
      */
     public function store(UsuarioRequest $request)
     {
-        $usuario = Usuario::create($request->all());
-        
+        $usuario = new Usuario;
+        $password = Hash::make($request->password);
+
+        $usuario->usuario = $request->usuario;
+        $usuario->nombre = $request->nombre;
+        $usuario->enlace_id = $request->enlace_id;
+        $usuario->password = $password;
+        $usuario->status = '1';
+        $usuario->save();
+        $usuario->grupo()->sync($request->grupo_id);
+
         return response()->json(['menssage' => "Se ha agregado un nuevo usuario", "usuario" => $usuario], 200);
     }
 
