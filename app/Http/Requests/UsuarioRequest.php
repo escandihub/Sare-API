@@ -26,12 +26,10 @@ class UsuarioRequest extends FormRequest
         
             // if ($this->getMethod() === 'PUT') {
                return [ 
-                   'Usuario' => ['required'],
-                    'Nombre' => ['required'],
-                    'IdEnlace' => ['required'],
-                    'IdGrupo' => ['required'],
-                    'Status' => ['required'],
-                    'Nivel' => ['required'],
+                   'usuario' => ['required', 'unique:usuarios,usuario'],
+                    'nombre' => ['required'],
+                    'enlace_id' => ['required'],
+                    'password' => ['required', 'confirmed']
                ];
             // }
         
