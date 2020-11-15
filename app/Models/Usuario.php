@@ -11,23 +11,21 @@ use App\Models\Traits\UsuarioTrait;
 
 class Usuario extends Authenticatable
 {
-    use HasFactory, UsuarioTrait;
-    // protected $table = 'catalogousuarios';
-    // protected $primaryKey = 'Id';
+	use HasFactory, UsuarioTrait;
+	// protected $table = 'catalogousuarios';
+	// protected $primaryKey = 'Id';
 
-    // const CREATED_AT = 'FechaRegistro';
-    // const UPDATED_AT = 'FechaModificado';
+	// const CREATED_AT = 'FechaRegistro';
+	// const UPDATED_AT = 'FechaModificado';
 
-    protected $fillable = [
-        'usuario',
-        'nombre',
-        'enlace_id',
-        // 'IdGrupo',
-        // 'status',
-        // 'Nivel',
-    ];
+	protected $fillable = [
+		"usuario",
+		"nombre",
+		"enlace_id",
+		// 'IdGrupo',
+		// 'status',
+		// 'Nivel',
+	];
 
-    protected $hidden = [
-        'password'
-    ];
+	protected $hidden = ["password"];
 }
