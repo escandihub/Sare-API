@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LicenciaRequest;
 
 use Illuminate\Database\Eloquent\Builder;
-
+use Illuminate\Support\Facades\Auth;
 /***
  * Controlador que se relaciona con la entidad totales_licencias
  *  => Indicador general
@@ -33,7 +33,7 @@ class LicenciaController extends Controller
 		$dataFinal = !$validarFechas ? date("Y-12-31") : Date($request->fecha_fin);
 
 		$licencia_captura = Licencia::query();
-		if (true) {
+		if (Auth::user()->hasMunicipio()) {
 			//sera el usuario que registre la operacion no deberia ser el municipio del usuario
 			$licencia_captura->where("IdEnlaceMunicipal", "=", 27); // Auth::user()->enlace->id
 			$licencia_captura
@@ -42,6 +42,7 @@ class LicenciaController extends Controller
 		} else {
 			$licencia_captura
 				->whereBetween("FechaCreacion", [$dataInicial, $dataFinal])
+				->with("municipio")
 				->orderBy("FechaCreacion", "desc");
 		}
 		return response()->json($licencia_captura->paginate(10), 200);
@@ -59,6 +60,7 @@ class LicenciaController extends Controller
 		// $request->month
 		$indicador = Licencia::create($request->all());
 		$indicador->IdUsuario = 5;
+		$indicador->IdEnlaceMunicipal = 27;
 		$indicador->MesConcluido = 0;
 		$indicador->save();
 
