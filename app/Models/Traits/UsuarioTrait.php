@@ -38,4 +38,17 @@ trait UsuarioTrait
 			return false;
 		}
 	}
+
+	public function habilidades(){
+		$perms = [];
+
+		$grupos = $this->grupo;
+		foreach($grupos as $grupo){
+			foreach($grupo->permisos as $permiso){
+				array_push($perms, $permiso["slug"]);
+			}
+		}
+
+		return $perms;
+	}
 }
