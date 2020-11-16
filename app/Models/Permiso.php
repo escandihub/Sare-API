@@ -24,4 +24,7 @@ class Permiso extends Model
     {
         return $this->belongsToMany('App\Models\Grupo')->withTimesTamps();
     }
+    public function usuario(){
+        return $this->hasMany('App\Models\Usuarios');
+    }
 }
