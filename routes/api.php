@@ -91,3 +91,11 @@ Route::get('/test', function () {
         
     
     });
+
+    Route::get('/habili', function(){
+        
+    $user = Usuario::findOrFail(2);
+    // $user->grupo;
+    
+    return response()->json($user->habilidades(), 200);
+    });
