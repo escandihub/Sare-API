@@ -46,14 +46,16 @@ class LicenciaEmpresaController extends Controller
 
 		// if(Auth::user()->hasMunicipio()){
 		if (false) {
-			$licencia_empresa->where("IdEnlaceMunicipal", "=", 27); // Auth::user()->enlace->id
+			$licencia_empresa->where("IdEnlaceMunicipal", "=", Auth::user()->enlace->id); // Auth::user()->enlace->id
 			$licencia_empresa
 				->whereBetween("FechaCreacion", [$dataInicial, $dataFinal])
+				->with("municipio")
 				->orderBy("FechaCreacion", "desc");
 		} else {
 			//super user or admin
 			$licencia_empresa
 				->whereBetween("FechaCreacion", [$dataInicial, $dataFinal])
+				->with("municipio")
 				->orderBy("FechaCreacion", "desc");
 		}
 

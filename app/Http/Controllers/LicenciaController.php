@@ -38,6 +38,7 @@ class LicenciaController extends Controller
 			$licencia_captura->where("IdEnlaceMunicipal", "=", 27); // Auth::user()->enlace->id
 			$licencia_captura
 				->whereBetween("FechaCreacion", [$dataInicial, $dataFinal])
+				->with("municipio")
 				->orderBy("FechaCreacion", "desc");
 		} else {
 			$licencia_captura
