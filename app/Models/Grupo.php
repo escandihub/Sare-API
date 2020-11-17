@@ -38,7 +38,7 @@ class Grupo extends Model
 			$menu = $ruta->menu->toArray(); //get the actual menu of the route on raw object
 			$userRoutes = $this->isAdded($userRoutes, $menu); //check is the menu is already added on the Array
 
-			foreach ($userRoutes as $key => $route) {  //iterator to see the menu match with route_menu_id to add where to correspond
+			foreach ($userRoutes as $key => $route) {  //iterator to see the menu match with route_menu_id to add where to correponde
 				if ($route["id"] == $ruta["menu_id"]) {
 					array_push($userRoutes[$key]["submenu"], $ruta);
 				}
