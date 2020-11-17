@@ -18,6 +18,7 @@ use App\Http\Controllers\Authenticate\RegisterController;
 use App\Models\Usuario;
 use App\Models\Permiso;
 use App\Models\Grupo;
+use App\Models\menu\Ruta;
 use Illuminate\Support\Facades\Gate;
 /*
 |--------------------------------------------------------------------------
@@ -98,4 +99,13 @@ Route::get('/test', function () {
     // $user->grupo;
     
     return response()->json($user->habilidades(), 200);
+    });
+
+    Route::get("/rutas", function(){
+        $usuario = Usuario::find(2);
+        // $grupo = $usuario->grupo()->permisos();
+        $grupo =  Grupo::find(2);
+        // $menu_ruta =  Ruta::find(1)->menu;
+
+        return response()->json($grupo->getRutas() , 200);
     });
