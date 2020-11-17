@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Authenticate;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Gate;
 class AuthController extends Controller
 {
 	//
@@ -58,11 +58,12 @@ class AuthController extends Controller
 			"oldPassword" => "required",
 			"password" => ["required", "same:password_confirmed"]
 		]); 
-
+			$usuario = Auth::user();
 		if(!\Hash::check($request->oldPassword, Auth::user()->password)){
 		 return response()->json(["message" => "La contraseña actual es incorrecta"], 422);
 		}
-		Auth::user()->password = \Hash::make($request->password);
+		$usuario->password = \Hash::make($request->password);
+		$usuario->save();
 
 		return response()->json([
 			"message" => "Contraseña actualizada"
