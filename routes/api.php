@@ -56,6 +56,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/abilities', [AuthController::class, 'habilidades']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+Route::post('/reset-users-password', [AuthController::class, 'resetUsersPassword']);
 
 
 Route::group(['middleware' => ['api']], function () {

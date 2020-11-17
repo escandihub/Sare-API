@@ -69,4 +69,21 @@ class AuthController extends Controller
 			"message" => "Contraseña actualizada"
 		], 201);
 	}
+
+	public function resetUsersPassword(Request $request){
+		$validation = $request->validate([
+			"id" => "required",
+			"password" => ["required", "same:password_confirmed"]
+		]); 	
+		if (Gate::allows('tiene-acceso', "full-access")) {
+			$usuario = Usuario::findOrFail($request->id); 
+			$usuario->password = \Hash::make($request->password);
+			$usuario->save();
+
+			return response()->json([
+				"message" => "Contraseña actualizada"
+			], 201);
+	}
+	return response()->json(["message" => "privilegios insuficientes"], 401);
+}
 }
