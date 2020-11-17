@@ -33,12 +33,12 @@ class Grupo extends Model
 	public function getRutas()
 	{
 		$userRoutes = [];
-			//model rutas context 
+		//model rutas context
 		foreach ($this->rutas as $ruta) {
 			$menu = $ruta->menu->toArray(); //get the actual menu of the route on raw object
-			$userRoutes = $this->isAdded($userRoutes, $menu);
+			$userRoutes = $this->isAdded($userRoutes, $menu); //check is the menu is already added on the Array
 
-			foreach ($userRoutes as $key => $route) {
+			foreach ($userRoutes as $key => $route) {  //iterator to see the menu match with route_menu_id to add where to correspond
 				if ($route["id"] == $ruta["menu_id"]) {
 					array_push($userRoutes[$key]["submenu"], $ruta);
 				}
