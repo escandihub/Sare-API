@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class Grupo extends Model
 {
 	use HasFactory;
@@ -33,22 +32,38 @@ class Grupo extends Model
 
 	public function getRutas()
 	{
-		$routes = [];
-		$slide = [];
-		// Grupo::find(2)->rutas
+		$userRoutes = [];
+			//model rutas context 
 		foreach ($this->rutas as $ruta) {
-			$menu = $ruta->menu;
-			array_push($slide, $menu);
-			// return $slide;
-			if ($menu["id"] == $ruta["menu_id"]) {
-				array_push($routes, $ruta["route"]);
-				foreach ($slide as $main) {
-					if ($main["id"] == $ruta["id"]) {
-						$main["submenu"] = $routes;
-					}
+			$menu = $ruta->menu->toArray(); //get the actual menu of the route on raw object
+			$userRoutes = $this->isAdded($userRoutes, $menu);
+
+			foreach ($userRoutes as $key => $route) {
+				if ($route["id"] == $ruta["menu_id"]) {
+					array_push($userRoutes[$key]["submenu"], $ruta);
 				}
 			}
 		}
+		return $userRoutes;
+	}
+
+	public function isAdded($slide, $menu)
+	{
+		if (empty($slide)) {
+			$lastKey = array_push($slide, $menu) - 1;
+			$slide[$lastKey]["submenu"] = [];
+		} else {
+			if ($this->existe($slide) != $menu["id"]) {
+				$lastKey = array_push($slide, $menu) - 1;
+				$slide[$lastKey]["submenu"] = [];
+			}
+		}
 		return $slide;
+	}
+	public function existe($slice)
+	{
+		foreach ($slice as $menu) {
+			return $menu["id"];
+		}
 	}
 }
