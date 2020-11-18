@@ -83,7 +83,8 @@ class AuthController extends Controller
 			return response()->json([
 				"message" => "Contraseña actualizada"
 			], 201);
-	}
+	}else{
 	return response()->json(["message" => "privilegios insuficientes"], 401);
+	}
 }
 }
