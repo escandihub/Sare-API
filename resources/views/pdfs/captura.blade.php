@@ -1,49 +1,65 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Generate PDF Laravel 8 - phpcodingstuff.com</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</head>
-<style type="text/css">
-    h2{
-        text-align: center;
-        font-size:22px;
-        margin-bottom:50px;
-    }
-    body{
-        background:#f2f2f2;
-    }
-    .section{
-        margin-top:30px;
-        padding:50px;
-        background:#fff;
-    }
-    .pdf-btn{
-        margin-top:30px;
-    }
-</style>    
-<body>
-    <div class="container">
-        <div class="col-md-8 section offset-md-2">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h2>Laravel 8 Generate PDF - phpcodingstuff.com</h2>
-                </div>
-                <div class="panel-body">
-                    <div class="main-div">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </div>
-                </div>
-                <div class="text-center pdf-btn">
-                  {{-- <a href="{{ route('pdf.generate') }}" class="btn btn-primary">Generate PDF</a> --}}
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
+	<head>
+		<title>Generate PDF Laravel 8 - phpcodingstuff.com</title>
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		/>
+	</head>
+	<style type="text/css">
+		h2 {
+			text-align: center;
+			font-size: 22px;
+			margin-bottom: 50px;
+		}
+		body {
+			background: #f2f2f2;
+		}
+		.section {
+			margin-top: 30px;
+			padding: 50px;
+			background: #fff;
+		}
+		.pdf-btn {
+			margin-top: 30px;
+		}
+	</style>
+	<body>
+		{{-- <div class="container"> --}}
+			<div class="float-left">
+				IconoF
+			</div>
+			<div class="float-right">
+				Reporte Mensual Correspondiente a "Mes" de Año Municipio "OCOSINGO"
+			</div>
+
+			<table class="table table-bordered mt-5">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Mes a reportar</th>
+						<th scope="col">Nombre de la empresa</th>
+						<th scope="col">Giro</th>
+						<th scope="col">Inversion Generada</th>
+						<th scope="col">Numero de empleos</th>
+						<th scope="col">Municipio</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach ( $capturas as $key => $captura )
+					<tr >
+						<th scope="row"> {{ $key }} </th>
+						<td>{{ $captura->Mes }}</td>
+						<td>{{ $captura->Empresa }}</td>
+						<td>{{ $captura->Giro }}</td>
+						<td>{{ $captura->Inversion }}</td>
+						<td>{{ $captura->No_Empleo }}</td>
+						<td>{{ $captura->municipio->Enlace_Municipal }}</td>
+					</tr>
+					@endforeach
+				</tbody>
+			</table>
+		{{-- </div> --}}
+	</body>
 </html>
