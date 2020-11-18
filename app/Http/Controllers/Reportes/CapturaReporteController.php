@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Reportes;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Licencia;
+use App\Models\LicenciaEmpresa;
 
 use PDF;
 class CapturaReporteController extends Controller
@@ -12,7 +12,9 @@ class CapturaReporteController extends Controller
 
     public function documento(Type $var = null)
     {
-        $pdf = PDF::loadView('pdfs.captura');    
+			$capturas = $this->findData("2019-10-01", "2019-11-30");
+			// dd($capturas);
+        $pdf = PDF::loadView('pdfs.captura',  compact('capturas'))->setPaper('letter', 'landscape');    
         return $pdf->download('demo.pdf');
     }
 	/**
@@ -22,9 +24,9 @@ class CapturaReporteController extends Controller
 	 */
 	public function findData($inicio, $fin)
 	{
-        $licencia_captura = Licencia::query();
+        $licencia_captura = LicenciaEmpresa::query();
 		$licencia_captura->where("IdEnlaceMunicipal", "=", 27); // Auth::user()->enlace->id
-		$licencia_captura
+		return $licencia_captura
 			->whereBetween("FechaCreacion", [$inicio, $fin])
 			->with("municipio")
 			->orderBy("FechaCreacion", "desc")->get();
