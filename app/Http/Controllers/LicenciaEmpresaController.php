@@ -23,6 +23,8 @@ class LicenciaEmpresaController extends Controller
 	public function __construct()
 	{
 		// $this->authorizeResource(LicenciaEmpresa::class);
+		// $this->middleware('can:show,method')->only('show');
+		// $this->authorize('update', $brewMethod)
 	}
 	/**
 	 * Display a listing of the resource.
