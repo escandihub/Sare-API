@@ -10,10 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * GET
- * POST
- * UPDATE
- * ELIMIT
+ * Super Usuario  =>  Eliminar y Editar (ALL)
+ * Enlace Municipal => Eliminar y Editar (Solo su municipio)(opcion) => Habilidad
+ * Administrador SARE => Visualizar Información 
  */
 /***
  * Controlador que se relaciona con la entidad licencia_empresa

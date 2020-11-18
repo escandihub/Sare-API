@@ -8,6 +8,13 @@ use App\Http\Requests\LicenciaRequest;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+
+/**
+ * Super Usuario  =>  Eliminar y Editar (ALL)
+ * Enlace Municipal => Eliminar y Editar (Solo su municipio)(opcion) => Habilidad
+ * Administrador SARE => Visualizar Información 
+ */
+
 /***
  * Controlador que se relaciona con la entidad totales_licencias
  *  => Indicador general
