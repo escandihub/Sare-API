@@ -10,7 +10,7 @@ class CapturaReporteController extends Controller
 {
 	public function documento(Type $var = null)
 	{
-		$capturas = $this->buscarCaptura( "App\Models\LicenciaEmpresa", "2019-10-01", "2019-10-05");
+		$capturas = $this->find_by_month( "App\Models\LicenciaEmpresa", "2019-10-01", "2019-10-05");
 		// dd($capturas);
 		$pdf = PDF::loadView("pdfs.captura", compact("capturas"))->setPaper(
 			"letter",
@@ -21,7 +21,7 @@ class CapturaReporteController extends Controller
 
 	public function licencias(Type $var = null)
 	{
-		$licencias = $this->buscarCaptura("App\Models\Licencia", "2019-10-01", "2019-10-05");
+		$licencias = $this->find_by_month("App\Models\Licencia", "2019-10-01", "2019-10-05");
 		// dd($capturas);
 		$pdf = PDF::loadView("pdfs.licencias", compact("licencias"))->setPaper(
 			"letter",
@@ -36,7 +36,7 @@ class CapturaReporteController extends Controller
 	 * @param  Model fin
 	 * @return QueryObject
 	 */
-	public function buscarCaptura($modelo, $inicio, $fin)
+	public function find_by_month($modelo, $inicio, $fin)
 	{
 		$licencia_captura = $modelo::query();
 		$licencia_captura->where("IdEnlaceMunicipal", "=", 27); // Auth::user()->enlace->id
@@ -46,4 +46,6 @@ class CapturaReporteController extends Controller
 			->orderBy("FechaCreacion", "desc")
 			->get();
 	}
+
+	public function find_by_year($model, $year){}
 }
