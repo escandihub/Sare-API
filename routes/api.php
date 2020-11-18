@@ -15,6 +15,8 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\Authenticate\AuthController;
 use App\Http\Controllers\Authenticate\RegisterController;
 
+use App\Http\Controllers\Reportes\CapturaReporteController;
+
 use App\Models\Usuario;
 use App\Models\Permiso;
 use App\Models\Grupo;
@@ -57,6 +59,9 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/abilities', [AuthController::class, 'habilidades']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 Route::post('/reset-users-password', [AuthController::class, 'resetUsersPassword']);
+
+//endpoint generate pdf via dompPDF
+Route::get('/pdf', [CapturaReporteController::class, 'documento']);
 
 
 Route::group(['middleware' => ['api']], function () {
