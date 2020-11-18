@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Super Usuario  =>  Eliminar y Editar (ALL)
  * Enlace Municipal => Eliminar y Editar (Solo su municipio)(opcion) => Habilidad
- * Administrador SARE => Visualizar Información 
+ * Administrador SARE => Visualizar Información
  */
 /***
  * Controlador que se relaciona con la entidad licencia_empresa
@@ -47,7 +47,11 @@ class LicenciaEmpresaController extends Controller
 
 		// if(Auth::user()->hasMunicipio()){
 		if (false) {
-			$licencia_empresa->where("IdEnlaceMunicipal", "=", Auth::user()->enlace->id); // Auth::user()->enlace->id
+			$licencia_empresa->where(
+				"IdEnlaceMunicipal",
+				"=",
+				Auth::user()->enlace->id
+			); // Auth::user()->enlace->id
 			$licencia_empresa
 				->whereBetween("FechaCreacion", [$dataInicial, $dataFinal])
 				->with("municipio")

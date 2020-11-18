@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Super Usuario  =>  Eliminar y Editar (ALL)
  * Enlace Municipal => Eliminar y Editar (Solo su municipio)(opcion) => Habilidad
- * Administrador SARE => Visualizar Información 
+ * Administrador SARE => Visualizar Información
  */
 
 /***

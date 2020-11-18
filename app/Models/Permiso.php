@@ -7,24 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permiso extends Model
 {
-    use HasFactory;
-    // protected $table = 'catalogopermisos';
-    // protected $primaryKey = 'Id';
+	use HasFactory;
+	// protected $table = 'catalogopermisos';
+	// protected $primaryKey = 'Id';
 
-    // const CREATED_AT = 'FechaRegistro';
-    // const UPDATED_AT = 'FechaModificado';
+	// const CREATED_AT = 'FechaRegistro';
+	// const UPDATED_AT = 'FechaModificado';
 
-    protected $fillable = [
-        'nombre',
-        'slug',
-        'descripcion',        
-    ];
+	protected $fillable = ["nombre", "slug", "descripcion"];
 
-    public function grupo()
-    {
-        return $this->belongsToMany('App\Models\Grupo')->withTimesTamps();
-    }
-    public function usuario(){
-        return $this->hasMany('App\Models\Usuarios');
-    }
+	public function grupo()
+	{
+		return $this->belongsToMany("App\Models\Grupo")->withTimesTamps();
+	}
+	public function usuario()
+	{
+		return $this->hasMany("App\Models\Usuarios");
+	}
 }

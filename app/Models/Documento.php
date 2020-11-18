@@ -7,15 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Documento extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $fillable = [
-        'titulo',
-        'usuario_id',
-    ];
+	protected $fillable = ["titulo", "usuario_id"];
 
-    public function usuario()
-    {
-        return $this->hasOne('App\Models\Usuario', 'usuario_id', 'id');
-    }
+	public function usuario()
+	{
+		return $this->hasOne("App\Models\Usuario", "usuario_id", "id");
+	}
 }

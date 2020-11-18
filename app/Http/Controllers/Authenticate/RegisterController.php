@@ -12,16 +12,19 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    public function register(UsuarioRequest $request){
-        $usuario = Usuario::create($request->all());
+	public function register(UsuarioRequest $request)
+	{
+		$usuario = Usuario::create($request->all());
 
-        $usuario->Password = Hash::make($request->password);
-        $usuario->save();
-        
-        return response()->json([
-            'message' => 'Usuario creado con exito', 
-            "usuario" => $usuario
-        ],
-             200);
-    }
+		$usuario->Password = Hash::make($request->password);
+		$usuario->save();
+
+		return response()->json(
+			[
+				"message" => "Usuario creado con exito",
+				"usuario" => $usuario,
+			],
+			200
+		);
+	}
 }

@@ -32,87 +32,87 @@ use Illuminate\Support\Facades\Gate;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(["middleware" => ["auth:sanctum"]], function () {
+	Route::apiResource("usuarios", UsuarioController::class);
+	Route::apiResource("enlaces", EnlaceController::class);
 
-    Route::apiResource('usuarios',UsuarioController::class);
-    Route::apiResource('enlaces', EnlaceController::class);
-    
-    Route::apiResource('permisos',PermisoController::class);
-    
-    Route::apiResource('grupos',GrupoController::class);
-    Route::apiResource('bitacoras',BitacoraController::class);
-    
-    Route::get('bitacora_detalles',[BitacoraDetallesController::class,'fechas']);
-    Route::get('bitacora_all',[BitacoraDetallesController::class,'index']);
-    
+	Route::apiResource("permisos", PermisoController::class);
 
-    
-    
-    //Upload a file 
-    Route::post('upload_file', [DocumentController::class, 'store']); 
+	Route::apiResource("grupos", GrupoController::class);
+	Route::apiResource("bitacoras", BitacoraController::class);
 
-    
+	Route::get("bitacora_detalles", [
+		BitacoraDetallesController::class,
+		"fechas",
+	]);
+	Route::get("bitacora_all", [BitacoraDetallesController::class, "index"]);
+
+	//Upload a file
+	Route::post("upload_file", [DocumentController::class, "store"]);
 });
 
-Route::post('login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
-Route::get('/abilities', [AuthController::class, 'habilidades']);
-Route::post('/reset-password', [AuthController::class, 'resetPassword']);
-Route::post('/reset-users-password', [AuthController::class, 'resetUsersPassword']);
+Route::post("login", [AuthController::class, "login"]);
+Route::post("/logout", [AuthController::class, "logout"]);
+Route::get("/abilities", [AuthController::class, "habilidades"]);
+Route::post("/reset-password", [AuthController::class, "resetPassword"]);
+Route::post("/reset-users-password", [
+	AuthController::class,
+	"resetUsersPassword",
+]);
 
 //endpoint generate pdf via dompPDF
-Route::get('/pdf', [CapturaReporteController::class, 'documento']);
+Route::get("/pdf", [CapturaReporteController::class, "documento"]);
 
-
-Route::group(['middleware' => ['api']], function () {
-    
-    Route::get('/prueba', function () {
-        return '0';
-    });
+Route::group(["middleware" => ["api"]], function () {
+	Route::get("/prueba", function () {
+		return "0";
+	});
 });
-Route::apiResource('capturas',LicenciaEmpresaController::class);
-Route::apiResource('licencias', LicenciaController::class);
-Route::get('licencia/per_dates',[LicenciaController::class,'rangoFecha'])->name('licencias.per-dates');
-Route::get('captura/per_date',[LicenciaEmpresaController::class,'porFechas'])->name("capturas.per-dates");
-Route::get('/test', function () {
+Route::apiResource("capturas", LicenciaEmpresaController::class);
+Route::apiResource("licencias", LicenciaController::class);
+Route::get("licencia/per_dates", [
+	LicenciaController::class,
+	"rangoFecha",
+])->name("licencias.per-dates");
+Route::get("captura/per_date", [
+	LicenciaEmpresaController::class,
+	"porFechas",
+])->name("capturas.per-dates");
+Route::get("/test", function () {
+	$grupo = Grupo::find(1);
+	$grupo->permisos()->sync([1, 2]);
+	return "0";
+	//   return $grupo->permisos;
+	// $usuario = Usuario::find(1);
+	// return $usuario->tienePermiso;
+	// $usuario = Usuario::with('grupo')->orderBy('id', 'Desc')->get();
 
-      $grupo =  Grupo::find(1);
-      $grupo->permisos()->sync([1,2]);
-      return '0';
-    //   return $grupo->permisos;
-    // $usuario = Usuario::find(1);
-    // return $usuario->tienePermiso;
-    // $usuario = Usuario::with('grupo')->orderBy('id', 'Desc')->get();
-    
-     $usuario = Usuario::find(1);
-    // $valor =  $usuario->tienePermiso('usuario.update');
-    if($usuario->propietario()){
-        return 'es propietario total';
-    }else{
-        return 'no lo es';
-    }
-    return Usuario::find(1)->propietario('captura.index');
-    Gate::authorize('tiene-acceso', 'usuario.update');
-    
-    // return $usuario->grupo()->permisos;
-    // return $usuario->tienePermiso('usuario.index');
-        
-    
-    });
+	$usuario = Usuario::find(1);
+	// $valor =  $usuario->tienePermiso('usuario.update');
+	if ($usuario->propietario()) {
+		return "es propietario total";
+	} else {
+		return "no lo es";
+	}
+	return Usuario::find(1)->propietario("captura.index");
+	Gate::authorize("tiene-acceso", "usuario.update");
 
-    Route::get('/habili', function(){
-        
-    $user = Usuario::findOrFail(2);
-    // $user->grupo;
-    
-    return response()->json($user->habilidades(), 200);
-    });
+	// return $usuario->grupo()->permisos;
+	// return $usuario->tienePermiso('usuario.index');
+});
 
-    Route::get("/rutas", function(){
-        $usuario = Usuario::find(2);
-        // $grupo = $usuario->grupo()->permisos();
-        $grupo =  Grupo::find(2);
-        // $menu_ruta =  Ruta::find(1)->menu;
+Route::get("/habili", function () {
+	$user = Usuario::findOrFail(2);
+	// $user->grupo;
 
-        return response()->json($grupo->getRutas() , 200);
-    });
+	return response()->json($user->habilidades(), 200);
+});
+
+Route::get("/rutas", function () {
+	$usuario = Usuario::find(2);
+	// $grupo = $usuario->grupo()->permisos();
+	$grupo = Grupo::find(2);
+	// $menu_ruta =  Ruta::find(1)->menu;
+
+	return response()->json($grupo->getRutas(), 200);
+});
