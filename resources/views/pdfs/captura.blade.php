@@ -24,15 +24,17 @@
 		.pdf-btn {
 			margin-top: 30px;
 		}
+		.logo{    width: 12em;
+		}
 	</style>
 	<body>
 		{{-- <div class="container"> --}}
-			<div class="float-left">
-				IconoF
-			</div>
-			<div class="float-right">
+			<div class="mb-3">
+      <img class="logo float-left" src="img/COESMER.png">
+			<div class="text-center">
 				Reporte Mensual Correspondiente a "Mes" de Año Municipio "OCOSINGO"
 			</div>
+			</div
 
 			<table class="table table-bordered mt-5">
 				<thead>
