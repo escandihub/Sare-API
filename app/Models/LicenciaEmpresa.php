@@ -28,4 +28,9 @@ class LicenciaEmpresa extends Model
         'MesConcluido',
         'Rango'
     ];
+
+    public function municipio()
+    {
+        return $this->hasOne('App\Models\Enlace', 'id', 'IdEnlaceMunicipal');
+    }
 }
