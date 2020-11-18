@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\AuthorizationException;
 class AuthController extends Controller
 {
 	//
@@ -84,7 +85,12 @@ class AuthController extends Controller
 				"message" => "Contraseña actualizada"
 			], 201);
 	}else{
-	return response()->json(["message" => "privilegios insuficientes"], 401);
+	return response()->json(["message" => "privilegios insuficientes"], 403);
+	/**
+	 * I don't know why is a reponse a 401 error code the gate tries to redirect to a anunthenticate page 
+	 */
+	// throw new AuthorizationException('Solo un Administrador pude realizar esta operacion.');
+	
 	}
 }
 }
