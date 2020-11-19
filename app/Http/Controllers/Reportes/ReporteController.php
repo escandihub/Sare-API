@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use PDF;
-class CapturaReporteController extends Controller
+class ReporteController extends Controller
 {
-	public function documento(Type $var = null)
+	public function capturas(Type $var = null)
 	{
 		$capturas = $this->find_by_month( "App\Models\LicenciaEmpresa", "2019-10-01", "2019-10-05");
 		// dd($capturas);
@@ -47,5 +47,4 @@ class CapturaReporteController extends Controller
 			->get();
 	}
 
-	public function find_by_year($model, $year){}
 }
