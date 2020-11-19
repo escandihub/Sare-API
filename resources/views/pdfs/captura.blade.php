@@ -26,6 +26,24 @@
 		}
 		.logo{    width: 12em;
 		}
+		.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #f5f5f5;
+  }
+	.linea {
+   position: relative;
+        border-top: 3px solid black;
+        border-radius: 2px 2px 3px 3px;
+        width: 10em;
+        height: 10px;
+       	bottom: 20px;
+        margin-left: auto;
+      	margin-right: auto
+      }
 	</style>
 	<body>
 		{{-- <div class="container"> --}}
@@ -62,6 +80,11 @@
 					@endforeach
 				</tbody>
 			</table>
-		{{-- </div> --}}
+		<footer class="footer">
+      <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+				<div class="linea"></div>
+      </div>
+    </footer>
 	</body>
 </html>
