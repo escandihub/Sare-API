@@ -54,12 +54,12 @@
 					@foreach ( $licencias as $key => $licencia )
 					<tr >
 						<th scope="row"> {{ $key + 1 }} </th>
-						<td>{{ $captura->Mes }}</td>
-						<td>{{ $captura->Licencias_Emitidas }}</td>
-            <td>{{ $captura->municipio->Enlace_Municipal }}</td>
-            <td>{{ $captura->Empleos_Generados }}</td>
-						<td>{{ $captura->Inversion_Generada }}</td>
-						<td>{{ $captura->No_Asesorias }}</td>
+						<td>{{ $licencia->Mes }}</td>
+						<td>{{ $licencia->Licencias_Emitidas }}</td>
+            <td>{{ $licencia->municipio->Enlace_Municipal }}</td>
+            <td>{{ $licencia->Empleos_Generados }}</td>
+						<td>{{ $licencia->Inversion_Generada }}</td>
+						<td>{{ $licencia->No_Asesorias }}</td>
 					</tr>
 					@endforeach
 				</tbody>
