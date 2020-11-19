@@ -4,13 +4,20 @@ namespace App\Http\Controllers\Reportes;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Usuario;
 use PDF;
+
+/**
+ * @api 
+ */
 class ReporteController extends Controller
 {
+	const LICENCIA = "App\Models\LicenciaEmpresa";
+	const EMPRESA = "App\Models\Licencia";
+
 	public function capturas(Type $var = null)
 	{
-		$capturas = $this->find_by_month( "App\Models\LicenciaEmpresa", "2019-10-01", "2019-10-05");
+		$capturas = $this->findByMonth( self::LICENCIA, "2019-10-01", "2019-10-05");
 		// dd($capturas);
 		$pdf = PDF::loadView("pdfs.captura", compact("capturas"))->setPaper(
 			"letter",
@@ -21,7 +28,7 @@ class ReporteController extends Controller
 
 	public function licencias(Type $var = null)
 	{
-		$licencias = $this->find_by_month("App\Models\Licencia", "2019-10-01", "2019-10-05");
+		$licencias = $this->findByMonth( self::EMPRESA, "2019-10-01", "2019-10-05");
 		// dd($capturas);
 		$pdf = PDF::loadView("pdfs.licencias", compact("licencias"))->setPaper(
 			"letter",
@@ -31,12 +38,12 @@ class ReporteController extends Controller
 	}
 
 	/**
-	 * @param  date inicio
-	 * @param  date fin
-	 * @param  Model fin
-	 * @return QueryObject
+	 * @param  date start date month
+	 * @param  date end date month
+	 * @param  Model 
+	 * @return Array  of mysql result
 	 */
-	public function find_by_month($modelo, $inicio, $fin)
+	public function findByMonth($modelo, $inicio, $fin)
 	{
 		$licencia_captura = $modelo::query();
 		$licencia_captura->where("IdEnlaceMunicipal", "=", 27); // Auth::user()->enlace->id
