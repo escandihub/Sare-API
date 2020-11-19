@@ -27,7 +27,7 @@ class EstadisticaController extends Controller
 
 		$doc = PDF::loadView("pdfs.empresas", compact("empresas"));
 		
-		return $pdf->download("estadistica_empresa.pdf");
+		return $doc->download("estadistica_empresa.pdf");
 	}
 	/**
 	 * The query going to return the array of query
