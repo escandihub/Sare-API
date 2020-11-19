@@ -8,7 +8,7 @@ use App\Models\Usuario;
 use PDF;
 
 /**
- * @api 
+ * @api
  */
 class ReporteController extends Controller
 {
@@ -17,7 +17,7 @@ class ReporteController extends Controller
 
 	public function capturas(Type $var = null)
 	{
-		$capturas = $this->findByMonth( self::LICENCIA, "2019-10-01", "2019-10-05");
+		$capturas = $this->findByMonth(self::LICENCIA, "2019-10-01", "2019-10-05");
 		// dd($capturas);
 		$pdf = PDF::loadView("pdfs.captura", compact("capturas"))->setPaper(
 			"letter",
@@ -28,7 +28,7 @@ class ReporteController extends Controller
 
 	public function licencias(Type $var = null)
 	{
-		$licencias = $this->findByMonth( self::EMPRESA, "2019-10-01", "2019-10-05");
+		$licencias = $this->findByMonth(self::EMPRESA, "2019-10-01", "2019-10-05");
 		// dd($capturas);
 		$pdf = PDF::loadView("pdfs.licencias", compact("licencias"))->setPaper(
 			"letter",
@@ -40,7 +40,7 @@ class ReporteController extends Controller
 	/**
 	 * @param  date start date month
 	 * @param  date end date month
-	 * @param  Model 
+	 * @param  Model
 	 * @return Array  of mysql result
 	 */
 	public function findByMonth($modelo, $inicio, $fin)
@@ -53,5 +53,4 @@ class ReporteController extends Controller
 			->orderBy("FechaCreacion", "desc")
 			->get();
 	}
-
 }
