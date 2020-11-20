@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Generate PDF Laravel 8 - phpcodingstuff.com</title>
-		<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+		<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<style type="text/css">
 		h2 {
