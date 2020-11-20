@@ -59,7 +59,7 @@
 					<tr>
 						<th scope="col">Municipios</th>
 						<th scope="col">Inversión Generada</th>
-						<th scope="col">Nomero de empleos</th>
+						<th scope="col">Numero de empleos</th>
 						<th scope="col">No. Empresas</th>
 					</tr>
 				</thead>
