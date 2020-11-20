@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Reportes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
-use PDF;
+use PDF, File;
 
 /**
  * @api
@@ -17,13 +17,15 @@ class ReporteController extends Controller
 
 	public function capturas(Type $var = null)
 	{
-		$capturas = $this->findByMonth(self::LICENCIA, "2019-10-01", "2019-10-02");
+		$capturas = $this->findByMonth(self::LICENCIA, "2019-10-01", "2019-10-03");
 		// dd($capturas);
 		$pdf = PDF::loadView("pdfs.captura", compact("capturas"))->setPaper(
 			"letter",
 			"landscape"
 		);
-		return $pdf->download("demo.pdf");
+		return $pdf->output();
+		//return $pdf->stream('archivo.pdf');
+		
 	}
 
 	public function licencias(Type $var = null)
