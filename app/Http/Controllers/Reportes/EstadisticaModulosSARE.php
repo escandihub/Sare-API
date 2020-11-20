@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Licencia;
 
+use PDF;
+
 class EstadisticaModulosSARE extends Controller
 {
 	/**
@@ -17,8 +19,9 @@ class EstadisticaModulosSARE extends Controller
 	 */
 	public function documento()
 	{
-		$opereation_module = $this->queryModuloSARE("Enero", "2019");
-		dd($opereation_module);
+        $modulos = $this->queryModuloSARE("Enero", "2019");
+        $pdf = PDF::loadView("pdfs.modulo_estadistica", compact("modulos"));
+		return $pdf->download("modulo_estadistica.pdf");
     }
     
 	final public function queryModuloSARE($month, $year)
