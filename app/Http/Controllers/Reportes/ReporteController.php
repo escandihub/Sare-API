@@ -17,7 +17,7 @@ class ReporteController extends Controller
 
 	public function capturas(Type $var = null)
 	{
-		$capturas = $this->findByMonth(self::LICENCIA, "2019-10-01", "2019-10-05");
+		$capturas = $this->findByMonth(self::LICENCIA, "2019-10-01", "2019-10-02");
 		// dd($capturas);
 		$pdf = PDF::loadView("pdfs.captura", compact("capturas"))->setPaper(
 			"letter",
