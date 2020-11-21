@@ -23,7 +23,7 @@ class CierreCapturaController extends Controller
 		$now =  new \DateTime(date("Y-m-d"));
         $fin =  new \DateTime($cierre->fecha_final);
         
-		if ($fin < $now ) {
+		if ($fin >= $now ) {
 			return response()->json(["can" => true], 200);
 		} else {
 			return response()->json(["can" => false], 200);
