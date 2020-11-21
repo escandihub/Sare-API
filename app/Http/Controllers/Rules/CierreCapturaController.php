@@ -10,10 +10,10 @@ use App\Models\CierreCaptura;
 class CierreCapturaController extends Controller
 {
     /**
-     * This controller check if the towns
-     * Are on date to save data 
+     * This controller checks if the municipalities 
+     * are on an available date to save data
      * @api api/canCreate
-     * need specify one date plus, e.g. if today is 2020-10-01 
+     * It's need specify one date plus, e.g. if today is 2020-10-01 
      * and end day is 2020-10-01  means that cannot be possible save data
      */
 	public function index()
