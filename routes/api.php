@@ -16,6 +16,10 @@ use App\Http\Controllers\Authenticate\AuthController;
 use App\Http\Controllers\Authenticate\RegisterController;
 
 use App\Http\Controllers\Reportes\ReporteController;
+use App\Http\Controllers\Reportes\EstadisticaController;
+use App\Http\Controllers\Reportes\EstadisticaModulosSARE;
+
+use App\Http\Controllers\Rules\CierreCapturaController;
 
 use App\Models\Usuario;
 use App\Models\Permiso;
@@ -62,6 +66,9 @@ Route::post("/reset-users-password", [
 
 //endpoint generate pdf via dompPDF
 Route::get("/pdf", [ReporteController::class, "capturas"]);
+Route::get("/query", [EstadisticaModulosSARE::class, "documento"]);
+
+Route::apiResource("canCreate", CierreCapturaController::class)->only(["index"]);
 
 Route::group(["middleware" => ["api"]], function () {
 	Route::get("/prueba", function () {
