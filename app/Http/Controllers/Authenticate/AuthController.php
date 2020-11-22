@@ -33,6 +33,7 @@ class AuthController extends Controller
 				404
 			);
 		}
+		$abilities = Auth::user()->habilidades();
 		$usuario = Auth::user()->grupo()->pluck("grupo_id");
 		$grupo = Grupo::find($usuario)->first();
 		$rutas = $grupo->getRutas();
@@ -40,7 +41,8 @@ class AuthController extends Controller
 		return response()->json([
 			"token" => $jwt_token,
 			"profile" => Auth::user(),
-			"routes" => $rutas
+			"routes" => $rutas,
+			"abilities" => $abilities
 		]);
 	}
 
