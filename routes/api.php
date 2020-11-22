@@ -14,6 +14,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\Authenticate\AuthController;
 use App\Http\Controllers\Authenticate\RegisterController;
+use App\Http\Controllers\Authenticate\abilitiesController;
 
 use App\Http\Controllers\Reportes\ReporteController;
 use App\Http\Controllers\Reportes\EstadisticaController;
@@ -57,7 +58,6 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
 
 Route::post("login", [AuthController::class, "login"]);
 Route::post("/logout", [AuthController::class, "logout"]);
-Route::get("/abilities", [AuthController::class, "habilidades"]);
 Route::post("/reset-password", [AuthController::class, "resetPassword"]);
 Route::post("/reset-users-password", [
 	AuthController::class,
@@ -107,7 +107,8 @@ Route::get("/test", function () {
 	// return $usuario->grupo()->permisos;
 	// return $usuario->tienePermiso('usuario.index');
 });
-
+// Route::get("/abilities", [AuthController::class, "habilidades"]);
+Route::apiResource("abilities", abilitiesController::class)->only(["index"]);
 Route::get("/habili", function () {
 	$user = Usuario::findOrFail(2);
 	// $user->grupo;
@@ -122,11 +123,15 @@ Route::get("/rutas", function () {
 	$grupo->rutas()->sync([9,3,2,8]);
 
 	return response()->json($grupo->getRutas(), 200);
+
+	//optener rutas 
 	$u = Usuario::findOrFail(2);
 
 	$u->grupo()->pluck("grupo_id"); //id del grupo - usuario 
 	$grupo = Grupo::find($u)->first();
 return $grupo->getRutas();
+
+/// estamos haciendo lo de optner rutas en el modelo Grupo
 	// $usuario = Usuario::find(2);
 	// $grupo = $usuario->grupo()->permisos();
 	$grupo = Grupo::find(2);
