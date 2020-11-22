@@ -13,8 +13,7 @@ class CierreCapturaController extends Controller
      * This controller checks if the municipalities 
      * are on an available date to save data
      * @api api/canCreate
-     * It's need specify one date plus, e.g. if today is 2020-10-01 
-     * and end day is 2020-10-01  means that cannot be possible save data
+		 * @return boolean 
      */
 	public function index()
 	{
