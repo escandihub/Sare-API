@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\AuthorizationException;
+
+use App\Models\Grupo;
+
 class AuthController extends Controller
 {
 	//
@@ -30,10 +33,14 @@ class AuthController extends Controller
 				404
 			);
 		}
+		$usuario = Auth::user()->grupo()->pluck("grupo_id");
+		$grupo = Grupo::find($usuario)->first();
+		$rutas = $grupo->getRutas();
 
 		return response()->json([
 			"token" => $jwt_token,
 			"profile" => Auth::user(),
+			"routes" => $rutas
 		]);
 	}
 

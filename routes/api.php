@@ -116,7 +116,12 @@ Route::get("/habili", function () {
 });
 
 Route::get("/rutas", function () {
-	$usuario = Usuario::find(2);
+	$u = Usuario::findOrFail(2);
+
+	$u->grupo()->pluck("grupo_id"); //id del grupo - usuario 
+	$grupo = Grupo::find($u)->first();
+return $grupo->getRutas();
+	// $usuario = Usuario::find(2);
 	// $grupo = $usuario->grupo()->permisos();
 	$grupo = Grupo::find(2);
 	// $menu_ruta =  Ruta::find(1)->menu;
