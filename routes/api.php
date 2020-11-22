@@ -116,6 +116,12 @@ Route::get("/habili", function () {
 });
 
 Route::get("/rutas", function () {
+
+	//savar nuevas rutas al grupo 
+	$grupo = Grupo::find(1);
+	$grupo->rutas()->sync([9,3,2,8]);
+
+	return response()->json($grupo->getRutas(), 200);
 	$u = Usuario::findOrFail(2);
 
 	$u->grupo()->pluck("grupo_id"); //id del grupo - usuario 
