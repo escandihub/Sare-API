@@ -10,6 +10,12 @@ class Menu extends Model
     use HasFactory;
 
     public function rutas(){
-        $this->hasMany("App\Models\Ruta");
+        $this->hasMany("App\Models\menu\Ruta");
+    }
+
+    public function getMenuWithRutes()
+    {
+        return $this->has("rutas")->get();
+        
     }
 }
