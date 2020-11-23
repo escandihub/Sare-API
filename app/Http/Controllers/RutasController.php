@@ -58,8 +58,9 @@ class RutasController extends Controller
 	public function update(Request $request, Grupo $ruta)
 	{
 		$ruta->rutas()->sync($request->rutas);
+		$nombre = $ruta->nombre;
         
-        return $ruta;
+    return response()->json(["message" => "Rutas del grupo " . $nombre], 200);
 	}
 
 	/**
