@@ -36,7 +36,7 @@ class RutasController extends Controller
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  \App\Models\Grupo $ruta
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show(Grupo $ruta)
@@ -52,7 +52,7 @@ class RutasController extends Controller
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
-	 * @param  int  $id
+	 * @param  \App\Models\Grupo $ruta
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, Grupo $ruta)
