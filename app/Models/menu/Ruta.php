@@ -9,8 +9,8 @@ class Ruta extends Model
 {
     use HasFactory;
 
-    
-    public function grupo(){
+    protected $hidden = ['pivot'];
+    public function grupos(){
         $this->belongsToMany("App\Models\Grupo");
     }
     
