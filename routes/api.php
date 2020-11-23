@@ -21,6 +21,7 @@ use App\Http\Controllers\Reportes\EstadisticaController;
 use App\Http\Controllers\Reportes\EstadisticaModulosSARE;
 
 use App\Http\Controllers\Rules\CierreCapturaController;
+use App\Http\Controllers\RutasController;
 
 use App\Models\Usuario;
 use App\Models\Permiso;
@@ -37,7 +38,10 @@ use Illuminate\Support\Facades\Gate;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//routes to be able to access views
+Route::apiResource("rutas", RutasController::class);
 Route::group(["middleware" => ["auth:sanctum"]], function () {
+	
 	Route::apiResource("usuarios", UsuarioController::class);
 	Route::apiResource("enlaces", EnlaceController::class);
 
@@ -116,7 +120,13 @@ Route::get("/habili", function () {
 	return response()->json($user->habilidades(), 200);
 });
 
-Route::get("/rutas", function () {
+Route::get("/rutas-test", function () {
+
+	//ver mis rutas
+	$grupo = Grupo::find(1);
+	// $menu_ruta =  Ruta::find(1)->menu;
+
+	return response()->json($grupo->getRutas(), 200);
 
 	//savar nuevas rutas al grupo 
 	$grupo = Grupo::find(1);
@@ -134,8 +144,5 @@ return $grupo->getRutas();
 /// estamos haciendo lo de optner rutas en el modelo Grupo
 	// $usuario = Usuario::find(2);
 	// $grupo = $usuario->grupo()->permisos();
-	$grupo = Grupo::find(2);
-	// $menu_ruta =  Ruta::find(1)->menu;
 
-	return response()->json($grupo->getRutas(), 200);
 });
