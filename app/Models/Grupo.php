@@ -37,7 +37,6 @@ class Grupo extends Model
 		foreach ($this->rutas as $ruta) {
 			$menu = $ruta->menu->toArray(); //get the actual menu of the route on raw object
 			$userRoutes = $this->isAdded($userRoutes, $menu); //check is the menu is already added on the Array
-
 			foreach ($userRoutes as $key => $route) {
 				//iterator to see the menu match with route_menu_id to add where to correponde
 				if ($route["id"] == $ruta["menu_id"]) {
@@ -54,17 +53,20 @@ class Grupo extends Model
 			$lastKey = array_push($slide, $menu) - 1;
 			$slide[$lastKey]["submenu"] = [];
 		} else {
-			if ($this->existe($slide) != $menu["id"]) {
+			if (!$this->existe($slide, $menu["id"])) {
 				$lastKey = array_push($slide, $menu) - 1;
 				$slide[$lastKey]["submenu"] = [];
 			}
 		}
 		return $slide;
 	}
-	public function existe($slice)
+	public function existe($slice, $newMenu)
 	{
 		foreach ($slice as $menu) {
-			return $menu["id"];
+			if($menu["id"] == $newMenu){
+				return true;
+			}
+			
 		}
 	}
 }
