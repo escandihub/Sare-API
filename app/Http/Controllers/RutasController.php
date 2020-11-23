@@ -55,9 +55,11 @@ class RutasController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(Request $request, Grupo $ruta)
 	{
-		//
+		$ruta->rutas()->sync($request->rutas);
+        
+        return $ruta;
 	}
 
 	/**
