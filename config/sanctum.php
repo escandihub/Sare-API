@@ -12,7 +12,7 @@ return [
     | and production domains which access your API via a frontend SPA.
     |
     */
-
+        // if i am on localhost then localhost:8000 when i be on serve by the spa then localhost:8080
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', 'localhost:8080')),
 
     /*
