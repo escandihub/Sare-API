@@ -8,6 +8,8 @@ use App\Models\Enlace;
 use Validator, Redirect, Response, File;
 use App\Http\Requests\DocumentRequest;
 
+use Illuminate\Support\Str;
+
 class DocumentController extends Controller
 {
 	public function store(DocumentRequest $request)
@@ -51,6 +53,8 @@ class DocumentController extends Controller
 
 	public function show(Documento $file)
 	{
+		// return (string) Str::uuid();
+		// (string) Str::orderedUuid();
 		$clean_name = $this->replaceName($file->municipio->Enlace_Municipal);
 		$path = public_path("uploads/" . $clean_name . "/" . $file->titulo);
 		// return $path = storage_path($file->titulo);
