@@ -9,9 +9,9 @@ class Documento extends Model
 {
 	use HasFactory;
 
-// 	protected $hidden = [
-// 		'id'
-// ];
+	protected $hidden = [
+		'id'
+];
 
 	protected $fillable = ["titulo", "municipio_id"];
 
