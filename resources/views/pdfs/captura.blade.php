@@ -47,7 +47,7 @@
 			<div class="mb-3">
       <img class="logo float-left" src="img/COESMER.png">
 			<div class="text-center">
-				Reporte Mensual Correspondiente a "Mes" de Año Municipio "OCOSINGO"
+				Reporte Mensual Correspondiente a {{  $capturas[0]->Mes  }} de Año Municipio {{ $capturas[0]->municipio->Enlace_Municipal }}
 			</div>
 			</div
 
@@ -79,7 +79,7 @@
 			</table>
 		<footer class="footer">
       <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+        <span class="text-muted text-justify"> {{ $usuario->nombre }}</span>
 				<div class="linea"></div>
       </div>
     </footer>
