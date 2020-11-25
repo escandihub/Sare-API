@@ -17,7 +17,7 @@ class CreateDocumentosTable extends Migration
             $table->increments('id');
             $table->uuid('uuid')->index();
             $table->string('titulo');
-            $table->integer('usuario_id');
+            $table->integer('municipio_id');
             $table->timestamps();
         });
     }
