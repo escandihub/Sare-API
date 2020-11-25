@@ -17,7 +17,8 @@ class DocumentController extends Controller
 			$enlace_municipal = Enlace::find(21);
 
 			//Formato para el archivo a salvar
-			$to_lowe_case = strtolower($enlace_municipal->Enlace_Municipal);
+			$sin_caracteres = $this->replaceName($enlace_municipal->Enlace_Municipal);
+			$to_lowe_case = strtolower($sin_caracteres);
 			$string = preg_replace("/[^a-z0-9_\s-]/", "", $to_lowe_case);
 			$string = preg_replace("/[\s-]+/", " ", $string);
 			$string = preg_replace("/[\s_]/", "_", $string);
@@ -30,11 +31,24 @@ class DocumentController extends Controller
 				"titulo" => $nombre_archivo,
 				"usuario_id" => 2,
 			]);
-			$request->file->move(public_path("uploads"), $nombre_archivo);
+			$request->file->move(
+				public_path("uploads/" . $sin_caracteres),
+				$nombre_archivo
+			);
 			// $request->file->move(public_path('uploads'), '.png');
 		}
 
 		return response()->json(["message" => "Se ha creado el"], 201);
+	}
+
+	public function replaceName($municipio)
+	{
+		$cadena = str_replace(
+			["á", "é", "í", "ó", "ú"],
+			["a", "e", "i", "o", "u"],
+			$municipio
+		);
+		return $cadena;
 	}
 }
 /*
