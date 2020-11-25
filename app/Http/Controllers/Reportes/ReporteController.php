@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 use PDF, File;
+use Illuminate\Support\Facades\Auth;
+
 /**
  * @api
  */
@@ -71,7 +73,7 @@ class ReporteController extends Controller
 	public function findByMonth($modelo, $inicio, $fin)
 	{
 		$licencia_captura = $modelo::query();
-		$licencia_captura->where("IdEnlaceMunicipal", "=", 27); // Auth::user()->enlace->id
+		$licencia_captura->where("IdEnlaceMunicipal", "=", Auth::user()->enlace->id); // 
 		return $licencia_captura
 			->whereBetween("FechaCreacion", [$inicio, $fin])
 			->with("municipio")
