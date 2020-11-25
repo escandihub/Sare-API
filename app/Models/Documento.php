@@ -9,10 +9,10 @@ class Documento extends Model
 {
 	use HasFactory;
 
-	protected $fillable = ["titulo", "usuario_id"];
+	protected $fillable = ["titulo", "municipio_id"];
 
-	public function usuario()
+	public function municipio()
 	{
-		return $this->hasOne("App\Models\Usuario", "usuario_id", "id");
+		return $this->hasOne("App\Models\Enlace", "id", "municipio_id");
 	}
 }
