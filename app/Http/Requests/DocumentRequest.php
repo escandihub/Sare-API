@@ -23,9 +23,15 @@ class DocumentRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'file' => 'required',
-            // 'file' => 'required|mimes:doc,docx,pdf,txt|max:2048',
-        ];
+        if ($this->getMethod() === 'POST') {
+            return [
+                'file' => 'required',
+            ];
+        }else if ($this->getMethod() === 'PUT') {            
+            return [
+                'file' => 'required',
+                // 'file' => ['required', 'unique:catalogoenlaces,Enlace_Municipal,' . $this->enlace->Id]
+            ];
+        }
     }
 }
