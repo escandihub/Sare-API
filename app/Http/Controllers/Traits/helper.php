@@ -15,7 +15,7 @@ trait helper
 
 	public function convertStringToUnderscore($municipio)
 	{
-		$sin_caracteres = $this->replaceName($municipio);
+		$sin_caracteres = $this->replaceSpecialCharacters($municipio);
 		$to_lowe_case = strtolower($sin_caracteres);
 		$string = preg_replace("/[^a-z0-9_\s-]/", "", $to_lowe_case);
 		$string = preg_replace("/[\s-]+/", " ", $string);
