@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 use PDF, File;
-
 /**
  * @api
  */
@@ -15,17 +14,41 @@ class ReporteController extends Controller
 	const LICENCIA = "App\Models\LicenciaEmpresa";
 	const EMPRESA = "App\Models\Licencia";
 
-	public function capturas(Type $var = null)
+	public function capturas(Request $request)
 	{
-		$capturas = $this->findByMonth(self::LICENCIA, "2019-10-01", "2019-10-03");
-		// dd($capturas);
-		$pdf = PDF::loadView("pdfs.captura", compact("capturas"))->setPaper(
-			"letter",
-			"landscape"
+		$validatedData = $request->validate([
+			"fecha_inicio" => "required",
+			"fecha_fin" => "required",
+		]);
+
+		$capturas = $this->findByMonth(
+			self::LICENCIA,
+			$request->fecha_inicio,
+			$request->fecha_fin
 		);
-		return $pdf->output();
+
+		// \Log::alert('fecha 1 ' . $request->fecha_inicio . " fecha 2 " .  $request->fecha_fin);
+		// \Log::info(count($capturas));
+		// $capturas = $this->findByMonth(self::LICENCIA, "2019-10-01", "2019-10-03");
+		if (count($capturas) != 0) {
+			$usuario = Usuario::find(2);
+			// dd($capturas->municipio->Enlace_Municipal);
+			$pdf = PDF::loadView(
+				"pdfs.captura",
+				compact("capturas", "usuario")
+			)->setPaper("letter", "landscape");
+			return $pdf->output();
+		} else {
+			return response()->json(
+				[
+					"message" => "No se encontrar datos con el criterio de busqueda",
+					"status" => false,
+				],
+				204
+			);
+		}
+
 		//return $pdf->stream('archivo.pdf');
-		
 	}
 
 	public function licencias(Type $var = null)
