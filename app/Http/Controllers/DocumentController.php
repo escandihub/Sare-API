@@ -57,7 +57,7 @@ class DocumentController extends Controller
 
 	public function show(Documento $file)
 	{
-		return $folder_name = $this->replaceSpecialCharacters($file->municipio->Enlace_Municipal);
+		$folder_name = $this->replaceSpecialCharacters($file->municipio->Enlace_Municipal);
 		$path = public_path("uploads/" . $folder_name . "/" . $file->titulo);
 		// return $path = storage_path($file->titulo);
 
