@@ -47,7 +47,7 @@
 			<div class="mb-3">
       <img class="logo float-left" src="img/COESMER.png">
 			<div class="text-center">
-				Reporte Mensual Correspondiente a {{  $capturas[0]->Mes  }} de Año Municipio {{ $capturas[0]->municipio->Enlace_Municipal }}
+				Reporte Mensual Correspondiente a {{  $capturas[0]->Mes  }} del Año  {{ $capturas[0]->Year }}  Municipio {{ $capturas[0]->municipio->Enlace_Municipal }}
 			</div>
 			</div
 
