@@ -9,7 +9,16 @@ class Documento extends Model
 {
 	use HasFactory;
 
+// 	protected $hidden = [
+// 		'id'
+// ];
+
 	protected $fillable = ["titulo", "municipio_id"];
+
+	// public function getRouteKeyName()
+	// {
+	// 		return 'uuid';
+	// }
 
 	public function municipio()
 	{
