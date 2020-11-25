@@ -15,10 +15,10 @@ class Documento extends Model
 
 	protected $fillable = ["titulo", "municipio_id"];
 
-	// public function getRouteKeyName()
-	// {
-	// 		return 'uuid';
-	// }
+	public function getRouteKeyName()
+	{
+			return 'uuid';
+	}
 
 	public function municipio()
 	{
