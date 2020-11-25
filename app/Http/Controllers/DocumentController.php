@@ -19,19 +19,23 @@ class DocumentController extends Controller
 		// return response()->json(['archivo' =>  $request->all()], 200);
 		// return (string) Str::uuid();
 		// (string) Str::orderedUuid();
-		if ($files = $request->file("file")) {
-			$enlace_municipal = Enlace::find(21);
 
-			//Formato para el archivo a salvar
-			$municipio = $this->convertStringToUnderscore(
-				$enlace_municipal->Enlace_Municipal
-			);
+		// if ($files = $request->file("file")) {
+		$enlace_municipal = Enlace::find(21);
 
-			$today = Date("d-m-Y");
+		//Formato para el archivo a salvar
+		$municipio = $this->convertStringToUnderscore(
+			$enlace_municipal->Enlace_Municipal
+		);
 
-			$nombre_archivo =
-				$municipio . "_" . $today . "." . $request->file->extension();
+		$today = Date("d-m-Y");
 
+		$nombre_archivo =
+			$municipio . "_" . $today . "." . $request->file->extension();
+
+		$existe = Documento::where("titulo", "=", $nombre_archivo)->get();
+
+		if (!count($existe)) {
 			Documento::create([
 				"titulo" => $nombre_archivo,
 				"uuid" => (string) Str::orderedUuid(),
@@ -41,10 +45,14 @@ class DocumentController extends Controller
 				public_path("uploads/" . $municipio),
 				$nombre_archivo
 			);
-			// $request->file->move(public_path('uploads'), '.png');
-		}
 
-		return response()->json(["message" => "Se ha creado el"], 201);
+			return response()->json(["message" => "Se ha creado el"], 201);
+		} else {
+			return response()->json(
+				["message" => "Ya se ha subido un documetos de este mes"],
+				422
+			);
+		}
 	}
 
 	public function index()
@@ -57,7 +65,9 @@ class DocumentController extends Controller
 
 	public function show(Documento $file)
 	{
-		$folder_name = $this->replaceSpecialCharacters($file->municipio->Enlace_Municipal);
+		$folder_name = $this->replaceSpecialCharacters(
+			$file->municipio->Enlace_Municipal
+		);
 		$path = public_path("uploads/" . $folder_name . "/" . $file->titulo);
 		// return $path = storage_path($file->titulo);
 
