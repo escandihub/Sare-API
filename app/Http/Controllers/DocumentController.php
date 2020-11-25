@@ -7,9 +7,10 @@ use App\Models\Documento;
 use App\Models\Enlace;
 use Validator, Redirect, Response, File;
 use App\Http\Requests\DocumentRequest;
-
 use Illuminate\Support\Str;
 use App\Http\Controllers\Traits\helper;
+
+use Illuminate\Support\Facades\Auth;
 
 class DocumentController extends Controller
 {
@@ -21,13 +22,16 @@ class DocumentController extends Controller
 		// (string) Str::orderedUuid();
 
 		// if ($files = $request->file("file")) {
-		$enlace_municipal = Enlace::find(21);
+		\Gate::authorize("tiene-acceso", "documento.store");
+		$enlace_municipal = Auth::user()->enlace;
 
 		//Formato para el archivo a salvar
 		$municipio = $this->convertStringToUnderscore(
 			$enlace_municipal->Enlace_Municipal
 		);
-
+		$folder_name = $this->replaceSpecialCharacters(
+			$enlace_municipal->Enlace_Municipal
+		);
 		$today = Date("d-m-Y");
 
 		$nombre_archivo =
@@ -42,7 +46,7 @@ class DocumentController extends Controller
 				"municipio_id" => $enlace_municipal->id,
 			]);
 			$request->file->move(
-				public_path("uploads/" . $municipio),
+				public_path("uploads/" . $folder_name),
 				$nombre_archivo
 			);
 
@@ -57,10 +61,18 @@ class DocumentController extends Controller
 
 	public function index()
 	{
-		$municipio = Enlace::find(21); // san cristobal
-
-		$documentos = Documento::where("municipio_id", "=", $municipio->id)->get();
-		return $documentos;
+		if (\Gate::allows("tiene-acceso", "full-access")) {
+			$documentos = Documento::all();
+			return $documentos;
+		} else {
+			\Gate::authorize("tiene-acceso", "documento.own.show");
+			$documentos = Documento::where(
+				"municipio_id",
+				"=",
+				Auth::user()->enlace->id
+			)->get();
+			return $documentos;
+		}
 	}
 
 	public function show(Documento $file)
