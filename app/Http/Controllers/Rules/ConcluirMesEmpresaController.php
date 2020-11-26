@@ -29,6 +29,13 @@ class ConcluirMesEmpresaController extends Controller
      */
     public function store(Request $request)
     {
+        $month = \Date('m');
+        $year = \Date('Y');
+
+        foreach($request->all() as $key => $value) {
+           LicenciaEmpresa::where("IdEnlaceMunicipal", "=", $value['IdEnlaceMunicipal'])->update(["MesConcluido" => $value['MesConcluido']]);
+        }
+        return response()->json(["message" => "OK"], 200);
         
     }
 
