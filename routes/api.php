@@ -22,7 +22,9 @@ use App\Http\Controllers\Reportes\EstadisticaModulosSARE;
 
 use App\Http\Controllers\Rules\CierreCapturaController;
 use App\Http\Controllers\Rules\CierreCapturaFechasController;
+use App\Http\Controllers\Rules\ConcluirMesEmpresaController;
 use App\Http\Controllers\RutasController;
+
 
 use App\Models\Usuario;
 use App\Models\Permiso;
@@ -77,6 +79,9 @@ Route::get("/estadistica/por-empresa", [EstadisticaController::class, "documento
 
 Route::apiResource("canCreate", CierreCapturaController::class)->only(["index"]);
 Route::apiResource("captura-fechas", CierreCapturaFechasController::class)->only(["index","update"]);
+
+//set month finished
+Route::resource('conclude-empresas', ConcluirMesEmpresaController::class);
 
 Route::group(["middleware" => ["api"]], function () {
 	Route::get("/prueba", function () {
