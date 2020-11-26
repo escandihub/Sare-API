@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\LicenciaEmpresa;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
-
+use App\Http\Requests\EstadisticaRequest;
 use PDF;
 class EstadisticaController extends Controller
 {
@@ -21,7 +21,7 @@ class EstadisticaController extends Controller
 	 * another name that take this operation
 	 * Indicadores de Operación por Empresas en los Módulos SARE del Mes de Enero
 	 */
-	public function generarReporte()
+	public function documento(EstadisticaRequest $request)
 	{
 		$empresas = $this->indicadorGeneralReporte("Enero", "2019");
 

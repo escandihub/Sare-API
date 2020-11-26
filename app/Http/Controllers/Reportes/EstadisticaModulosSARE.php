@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Licencia;
-
+use App\Http\Requests\EstadisticaRequest;
 use PDF;
 
 class EstadisticaModulosSARE extends Controller
@@ -17,7 +17,7 @@ class EstadisticaModulosSARE extends Controller
 	 * result to  make a document
 	 * @return query result
 	 */
-	public function documento()
+	public function documento(EstadisticaRequest $request)
 	{
         $modulos = $this->queryModuloSARE("Enero", "2019");
         $pdf = PDF::loadView("pdfs.modulo_estadistica", compact("modulos"));
