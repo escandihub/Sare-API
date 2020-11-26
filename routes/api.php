@@ -76,6 +76,7 @@ Route::get("/estadistica/totales", [EstadisticaModulosSARE::class, "documento"])
 Route::get("/estadistica/por-empresa", [EstadisticaController::class, "documento"]);
 
 Route::apiResource("canCreate", CierreCapturaController::class)->only(["index"]);
+Route::apiResource("captura-fechas", CierreCapturaFechasController::class)->only(["index","update"]);
 
 Route::group(["middleware" => ["api"]], function () {
 	Route::get("/prueba", function () {
