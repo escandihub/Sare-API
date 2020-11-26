@@ -47,7 +47,7 @@ class LicenciaPorEmpresaPolicy
      */
     public function create(Usuario $usuario)
     {
-        return $usuario->id > 0
+        return $usuario->id > 1
         ? Response::allow()
         : Response::deny('No puede crear Licencias' . $usuario->nombre);
     }
@@ -61,9 +61,9 @@ class LicenciaPorEmpresaPolicy
      */
     public function update(Usuario $usuario, LicenciaEmpresa $licenciaEmpresa)
     {
-        return $usuario->id > 0
+        return $usuario->enlace->id === $licenciaEmpresa->IdEnlaceMunicipal 
         ? Response::allow()
-        : Response::deny('Privilegios insuficientes.');
+        : Response::deny('Privilegios insuficientes esta licencia no le pertenece.');
     }
 
     /**
