@@ -30,7 +30,7 @@ class LicenciaEmpresaRequest extends FormRequest
             'No_Empleo' => ['required'],
             
             // id
-            'IdEnlaceMunicipal' => ['required','exists:catalogoenlaces,id'],
+            // 'IdEnlaceMunicipal' => ['required','exists:catalogoenlaces,id'],
 
             'Mes' => ['required'],
             'Year' => ['required'],
