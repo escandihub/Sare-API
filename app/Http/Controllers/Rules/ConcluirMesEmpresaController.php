@@ -10,7 +10,8 @@ use App\Models\LicenciaEmpresa;
 class ConcluirMesEmpresaController extends Controller
 {
 	/**
-	 * Display a listing of the resource.
+	 * Display a list a company licenses
+     * on the actual month and year 
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -31,7 +32,11 @@ class ConcluirMesEmpresaController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Update the close captura 
+     * when if in the current month 
+     * going to run very well
+     * if want to set another month with other year
+     * it's no supported yet, be carefull 
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response

@@ -81,7 +81,7 @@ Route::apiResource("canCreate", CierreCapturaController::class)->only(["index"])
 Route::apiResource("captura-fechas", CierreCapturaFechasController::class)->only(["index","update"]);
 
 //set month finished
-Route::resource('conclude-empresas', ConcluirMesEmpresaController::class);
+Route::resource('conclude-empresas', ConcluirMesEmpresaController::class)->only(["index", "store"]);
 
 Route::group(["middleware" => ["api"]], function () {
 	Route::get("/prueba", function () {
