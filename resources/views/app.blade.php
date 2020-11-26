@@ -11,16 +11,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>sare-front</title>
-   <link href="{{ asset('dist/js/about.39f9dbc3.js')}}" rel="prefetch" />
-    <link href="{{ asset('dist/js/chunk-2d216214.926a9779.js')}}" rel="prefetch" />
-    <link href="{{ asset('dist/js/chunk-2d216257.256ee085.js')}}" rel="prefetch" />
-    <link href="{{ asset('dist/js/chunk-67f56a7e.e1b968b6.js')}}" rel="prefetch" />
-    <link href="{{ asset('dist/css/app.394cd99e.css')}}" rel="preload" as="style" />
-    <link href="{{ asset('dist/css/chunk-vendors.272f7264.css')}}" rel="preload" as="style" />
-    <link href="{{ asset('dist/js/app.de35633c.js')}}" rel="preload" as="script" />
-    <link href="{{ asset('dist/js/chunk-vendors.d027c23f.js')}}" rel="preload" as="script" />
-    <link href="{{ asset('dist/css/chunk-vendors.272f7264.css')}}" rel="stylesheet" />
-    <link href="{{ asset('dist/css/app.394cd99e.css')}}" rel="stylesheet" />
+
+<link href="{{ asset('/dist/js/about.e5d86d95.js')}}" rel="prefetch" />
+<link href="{{ asset('/dist/js/chunk-02b643a9.c5bf3eea.js')}}" rel="prefetch" />
+<link href="{{ asset('/dist/js/chunk-2d0a3c8d.5d457f1a.js')}}" rel="prefetch" />
+<link href="{{ asset('/dist/js/chunk-2d0b721e.01c7ebd2.js')}}" rel="prefetch" />
+<link href="{{ asset('/dist/js/chunk-2d216214.926a9779.js')}}" rel="prefetch" />
+<link href="{{ asset('/dist/js/chunk-2d216257.256ee085.js')}}" rel="prefetch" />
+<link href="{{ asset('/dist/js/chunk-2d2244c4.000716c4.js')}}" rel="prefetch" />
+<link href="{{ asset('/dist/css/app.22f826e1.css')}}" rel="preload" as="style" />
+<link href="{{ asset('/dist/js/app.d0661bf8.js')}}" rel="preload')}}" as="script" />
+<link href="{{ asset('/dist/js/chunk-vendors.5c99db81.js')}}" rel="preload" as="script" />
+<link href="{{ asset('/dist/css/app.22f826e1.css')}}" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+  
+  
     
 </head>
 <body>
@@ -31,7 +44,7 @@
       ></noscript
     >
     <div id="app"></div>
-    <script src="{{ asset('dist/js/chunk-vendors.d027c23f.js')}}"></script>
-    <script src="{{ asset('dist/js/app.de35633c.js')}}"></script>
+    <script src="{{ asset('/dist/js/chunk-vendors.5c99db81.js')}}"></script>
+    <script src="{{ asset('/dist/js/app.d0661bf8.js')}}"></script>
   </body>
 </html>
