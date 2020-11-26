@@ -21,6 +21,7 @@ use App\Http\Controllers\Reportes\EstadisticaController;
 use App\Http\Controllers\Reportes\EstadisticaModulosSARE;
 
 use App\Http\Controllers\Rules\CierreCapturaController;
+use App\Http\Controllers\Rules\CierreCapturaFechasController;
 use App\Http\Controllers\RutasController;
 
 use App\Models\Usuario;
@@ -57,8 +58,9 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
 	Route::get("bitacora_all", [BitacoraDetallesController::class, "index"]);
 
 	//Upload a file
-	Route::post("upload_file", [DocumentController::class, "store"]);
-});
+	
+}); // end api protections 
+Route::apiResource("files", DocumentController::class)->only(['store', 'index', 'show']);
 
 Route::post("login", [AuthController::class, "login"]);
 Route::post("/logout", [AuthController::class, "logout"]);
@@ -69,8 +71,9 @@ Route::post("/reset-users-password", [
 ]);
 
 //endpoint generate pdf via dompPDF
-Route::get("/pdf", [ReporteController::class, "capturas"]);
-Route::get("/query", [EstadisticaModulosSARE::class, "documento"]);
+Route::get("/capturas/documento", [ReporteController::class, "capturas"]);
+Route::get("/estadistica/totales", [EstadisticaModulosSARE::class, "documento"]);
+Route::get("/estadistica/por-empresa", [EstadisticaController::class, "documento"]);
 
 Route::apiResource("canCreate", CierreCapturaController::class)->only(["index"]);
 
