@@ -118,7 +118,7 @@ class LicenciaEmpresaController extends Controller
 	 */
 	public function destroy(LicenciaEmpresa $captura)
 	{
-		$this->authorize("delete", $captura);
+		\Gate::authorize("tiene-acceso", "full-access");
 		$captura->delete();
 		return response()->json(["message" => "Se ha eliminado una licencia"], 200);
 	}
