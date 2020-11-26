@@ -45,13 +45,12 @@ class LicenciaEmpresaController extends Controller
 
 		$licencia_empresa = LicenciaEmpresa::query();
 
-		// if(Auth::user()->hasMunicipio()){
 		if (!\Gate::allows("tiene-acceso", "full-access")) {
 			$licencia_empresa->where(
 				"IdEnlaceMunicipal",
 				"=",
 				Auth::user()->enlace->id
-			); // Auth::user()->enlace->id
+			);
 			$licencia_empresa
 				->whereBetween("FechaCreacion", [$dataInicial, $dataFinal])
 				->with("municipio")
@@ -76,9 +75,14 @@ class LicenciaEmpresaController extends Controller
 	public function store(LicenciaEmpresaRequest $request)
 	{
 		$this->authorize("create", LicenciaEmpresa::class);
-		return $request->all();
-		$usuario = $request->IdUsuario = \Auth::user()->id;
-		LicenciaEmpresa::create($request->all());
+
+		$usuario = \Auth::user();
+		$addInfo = [
+			"IdEnlaceMunicipal" => $usuario->enlace->id,
+			"IdUsuario" => $usuario->id,
+		];
+
+		LicenciaEmpresa::create(array_merge($request->all(), $addInfo));
 		return response()->json(["message" => "Registro agregado"], 201);
 	}
 
