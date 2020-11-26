@@ -46,7 +46,7 @@ class LicenciaEmpresaController extends Controller
 		$licencia_empresa = LicenciaEmpresa::query();
 
 		// if(Auth::user()->hasMunicipio()){
-		if (false) {
+		if (!\Gate::allows("tiene-acceso", "full-access")) {
 			$licencia_empresa->where(
 				"IdEnlaceMunicipal",
 				"=",
@@ -75,8 +75,9 @@ class LicenciaEmpresaController extends Controller
 	 */
 	public function store(LicenciaEmpresaRequest $request)
 	{
-		$this->authorize("create");
-		$usuario = $request->IdUsuario = 5;
+		$this->authorize("create", LicenciaEmpresa::class);
+		return $request->all();
+		$usuario = $request->IdUsuario = \Auth::user()->id;
 		LicenciaEmpresa::create($request->all());
 		return response()->json(["message" => "Registro agregado"], 201);
 	}
@@ -90,9 +91,14 @@ class LicenciaEmpresaController extends Controller
 	 */
 	public function update(Request $request, LicenciaEmpresa $captura)
 	{
-		$this->authorize("update", $captura);
+		$isSuper = \Gate::inspect("tiene-acceso", "full-access");
 
-		$captura->update($request->all());
+		if ($isSuper->allowed()) {
+			$captura->update($request->all());
+		} else {
+			$this->authorize("update", $captura);
+			$captura->update($request->all());
+		}
 
 		return response()->json(
 			["message" => "Se actualizo una nueva Licencia por Empresa"],
