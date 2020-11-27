@@ -15,7 +15,7 @@ class BitacoraController extends Controller
 	 */
 	public function index()
 	{
-		$bitacoras = Bitacora::all();
+		$bitacoras = Bitacora::with("movimiento", "usuario")->paginate(10);
 		return response()->json($bitacoras, 200);
 	}
 
