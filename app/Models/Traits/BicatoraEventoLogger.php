@@ -36,11 +36,11 @@ trait BicatoraEventoLogger
 				$descripcion = ucfirst($eventName) . " a " . $reflect->getShortName();
 				$tipo_operacion_id = static::getActionName($eventName);
 				$log = [
-					"IdUsuario" => $user_id,
+					"usuario_id" => $user_id,
 					"entidad" => get_class($model),
 					"referencia" => $model->id,
 					"descripcion" => $descripcion,
-					"IdTipo" => intval($tipo_operacion_id),
+					"tipo_id" => intval($tipo_operacion_id),
 					"fecha" => Carbon::now(),
 				];
 				Bitacora::create($log);
