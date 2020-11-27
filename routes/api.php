@@ -27,6 +27,7 @@ use App\Http\Controllers\RutasController;
 
 
 use App\Models\Usuario;
+use App\Models\Bitacora;
 use App\Models\Permiso;
 use App\Models\Grupo;
 use App\Models\menu\Ruta;
@@ -154,4 +155,10 @@ return $grupo->getRutas();
 	// $usuario = Usuario::find(2);
 	// $grupo = $usuario->grupo()->permisos();
 
+});
+
+Route::get('/ver/bitacora', function () {
+	$bitacora = Bitacora::with("movimiento", "usuario")->get();
+
+	return $bitacora;
 });
