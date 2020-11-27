@@ -11,12 +11,22 @@ class Bitacora extends Model
 	protected $table = "bitacora";
 	public $timestamps = false;
 	protected $fillable = [
-		"IdUsuario",
+		"usuario_id",
 		"entidad",
 		"referencia",
 		"descripcion",
 		"fecha",
-		"IdTipo",
+		"tipo_id",
 	];
 	protected $hidden = [];
+
+	function movimiento()
+	{
+		return $this->hasOne("App\Models\BitacoraTipo", "id", "tipo_id");
+	}
+	function usuario()
+	{
+		return $this->hasOne("App\Models\Usuario", "id", "usuario_id");
+	}
+	
 }
