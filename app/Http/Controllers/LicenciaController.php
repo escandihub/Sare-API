@@ -40,9 +40,9 @@ class LicenciaController extends Controller
 		$dataFinal = !$validarFechas ? date("Y-12-31") : Date($request->fecha_fin);
 
 		$licencia_captura = Licencia::query();
-		if (Auth::user()->hasMunicipio()) {
+		if (!\Gate::allows("tiene-acceso", "full-access")) {
 			//sera el usuario que registre la operacion no deberia ser el municipio del usuario
-			$licencia_captura->where("IdEnlaceMunicipal", "=", 27); // Auth::user()->enlace->id
+			$licencia_captura->where("IdEnlaceMunicipal", "=", \Auth::user()->enlace->id); // Auth::user()->enlace->id
 			$licencia_captura
 				->whereBetween("FechaCreacion", [$dataInicial, $dataFinal])
 				->with("municipio")
@@ -67,8 +67,8 @@ class LicenciaController extends Controller
 		// $request->municipio
 		// $request->month
 		$indicador = Licencia::create($request->all());
-		$indicador->IdUsuario = 5;
-		$indicador->IdEnlaceMunicipal = 27;
+		$indicador->IdUsuario = \Auth::user()->id;
+		$indicador->IdEnlaceMunicipal = \Auth::user()->enlace->id;
 		$indicador->MesConcluido = 0;
 		$indicador->save();
 
