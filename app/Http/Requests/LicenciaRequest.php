@@ -28,7 +28,6 @@ class LicenciaRequest extends FormRequest
             'Empleos_Generados' => ['required'],
             'Inversion_Generada' => ['required'],
             'No_Asesorias' => ['required'],
-            'IdEnlaceMunicipal' => ['required'],
             'Mes' => ['required'],
             'Year' => ['required'],
         ];
