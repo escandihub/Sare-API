@@ -33,7 +33,7 @@ class ReporteController extends Controller
 		// \Log::info(count($capturas));
 		// $capturas = $this->findByMonth(self::LICENCIA, "2019-10-01", "2019-10-03");
 		if (count($capturas) != 0) {
-			$usuario = Usuario::find(2);
+			$usuario = \Auth::user();
 			// dd($capturas->municipio->Enlace_Municipal);
 			$pdf = PDF::loadView(
 				"pdfs.captura",
