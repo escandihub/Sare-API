@@ -11,7 +11,7 @@ class ConcluirMesEmpresaController extends Controller
 {
 	/**
 	 * Display a list a company licenses
-     * on the actual month and year 
+	 * on the actual month and year
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -32,11 +32,11 @@ class ConcluirMesEmpresaController extends Controller
 	}
 
 	/**
-	 * Update the close captura 
-     * when if in the current month 
-     * going to run very well
-     * if want to set another month with other year
-     * it's no supported yet, be carefull 
+	 * Update the close captura
+	 * when if in the current month
+	 * going to run very well
+	 * if want to set another month with other year
+	 * it's no supported yet, be carefull
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
@@ -47,10 +47,10 @@ class ConcluirMesEmpresaController extends Controller
 		$year = \Date("Y");
 
 		foreach ($request->all() as $key => $value) {
-			LicenciaEmpresa::where("IdEnlaceMunicipal", $value["IdEnlaceMunicipal"])
-				->where("Year", $year)
-				->where("Mes", $month)
-				->update(["MesConcluido" => $value["MesConcluido"]]);
+			LicenciaEmpresa::whereRaw(
+				"IdEnlaceMunicipal = ? AND MONTH(FechaCreacion) = ? AND YEAR(FechaCreacion) = ?",
+				[$value["IdEnlaceMunicipal"], $month, $year]
+			)->update(["MesConcluido" => $value["MesConcluido"]]);
 		}
 		return response()->json(["message" => "OK"], 200);
 	}
