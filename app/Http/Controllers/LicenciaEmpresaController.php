@@ -80,6 +80,7 @@ class LicenciaEmpresaController extends Controller
 		$addInfo = [
 			"IdEnlaceMunicipal" => $usuario->enlace->id,
 			"IdUsuario" => $usuario->id,
+			"MesConcluido" => 0
 		];
 
 		LicenciaEmpresa::create(array_merge($request->all(), $addInfo));
