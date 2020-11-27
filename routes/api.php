@@ -44,6 +44,7 @@ use Illuminate\Support\Facades\Gate;
 */
 //routes to be able to access views
 Route::apiResource("rutas", RutasController::class);
+Route::get("bitacoras/movimientos", [BitacoraController::class, "movimientos"]);
 Route::group(["middleware" => ["auth:sanctum"]], function () {
 	
 	Route::apiResource("usuarios", UsuarioController::class);
@@ -53,6 +54,7 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
 
 	Route::apiResource("grupos", GrupoController::class);
 	Route::apiResource("bitacoras", BitacoraController::class);
+	
 
 	Route::get("bitacora_detalles", [
 		BitacoraDetallesController::class,

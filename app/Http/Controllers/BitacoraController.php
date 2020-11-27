@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BitacoraRequest;
 use App\Models\Bitacora;
+use App\Models\bitacoraTipo;
 use Illuminate\Http\Request;
 
 class BitacoraController extends Controller
@@ -17,6 +18,17 @@ class BitacoraController extends Controller
 	{
 		$bitacoras = Bitacora::with("movimiento", "usuario")->paginate(10);
 		return response()->json($bitacoras, 200);
+	}
+	public function movimientos()
+	{
+		$tipos = bitacoraTipo::all();
+
+		return response()->json(
+			[
+				"movimientos" => $tipos,
+			],
+			200
+		);
 	}
 
 	/**
