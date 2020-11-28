@@ -14,9 +14,17 @@ class BitacoraController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$bitacoras = Bitacora::with("movimiento", "usuario")->paginate(10);
+		$validarFechas = $request->validate([
+			"fecha_inicio" => "date",
+			"fecha_fin" => "date",
+		]);
+		//verificar si en el params se encuentra datos
+		$date_inicial = !$validarFechas ? date("Y-01-01") : Date($request->fecha_inicio);
+		$date_final = !$validarFechas ? date("Y-12-31") : Date($request->fecha_fin);
+
+		$bitacoras = Bitacora::whereBetween("Fecha", [$date_inicial, $date_final])->with("movimiento", "usuario")->paginate(2);
 		return response()->json($bitacoras, 200);
 	}
 	public function movimientos()
