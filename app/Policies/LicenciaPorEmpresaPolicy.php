@@ -75,7 +75,7 @@ class LicenciaPorEmpresaPolicy
      */
     public function delete(Usuario $usuario, LicenciaEmpresa $licenciaEmpresa)
     {
-        return $usuario->id > 0
+        return $usuario->enlace->id === $licenciaEmpresa->IdEnlaceMunicipal
         ? Response::allow()
         : Response::deny('Privilegios insuficientes.');
     }
