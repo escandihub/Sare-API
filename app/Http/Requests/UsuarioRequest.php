@@ -27,7 +27,7 @@ class UsuarioRequest extends FormRequest
 		return [
 			"usuario" => ["required", "unique:usuarios,usuario"],
 			"nombre" => ["required"],
-			"enlace_id" => ["required"],
+			// "enlace_id" => ["required"],
 			"password" => ["required", "confirmed"],
 		];
 		// }
