@@ -80,7 +80,7 @@ class LicenciaEmpresaController extends Controller
 		$addInfo = [
 			"IdEnlaceMunicipal" => $usuario->enlace->id,
 			"IdUsuario" => $usuario->id,
-			"MesConcluido" => 0
+			"MesConcluido" => 0,
 		];
 
 		LicenciaEmpresa::create(array_merge($request->all(), $addInfo));
@@ -101,7 +101,7 @@ class LicenciaEmpresaController extends Controller
 		if ($isSuper->allowed()) {
 			$captura->update($request->all());
 		} else {
-			$this->authorize("update", $captura);
+			$this->authorize("update", $captura); //this is a policy
 			$captura->update($request->all());
 		}
 
@@ -119,9 +119,19 @@ class LicenciaEmpresaController extends Controller
 	 */
 	public function destroy(LicenciaEmpresa $captura)
 	{
-		\Gate::authorize("tiene-acceso", "full-access");
-		$captura->delete();
-		return response()->json(["message" => "Se ha eliminado una licencia"], 200);
+		$isSuper = \Gate::inspect("tiene-acceso", "full-access");
+		if ($isSuper->allowed() || \Gate::allows("delete", $captura)) {
+			$captura->delete();
+			return response()->json(
+				["message" => "Se ha eliminado una licencia"],
+				200
+			);
+		} else {
+			return response()->json(
+				["message" => "Sin privilegios sufiententes"],
+				422
+			);
+		}
 	}
 
 	/**
