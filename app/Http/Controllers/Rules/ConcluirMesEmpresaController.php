@@ -52,7 +52,7 @@ class ConcluirMesEmpresaController extends Controller
 				[$value["IdEnlaceMunicipal"], $month, $year]
 			)->update(["MesConcluido" => $value["MesConcluido"]]);
 		}
-		return response()->json(["message" => "OK"], 200);
+		return response()->json(["message" => "Se ha Cerrado la Captura de los municipios seleccionados"], 200);
 	}
 
 	/**
