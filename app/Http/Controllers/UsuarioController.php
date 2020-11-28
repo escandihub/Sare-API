@@ -18,7 +18,7 @@ class UsuarioController extends Controller
 	 */
 	public function index()
 	{
-		$usuarios = Usuario::with(["enlace:Id,Enlace_Municipal", "grupo"])->get();
+		$usuarios = Usuario::with(["enlace", "grupo"])->get();
 
 		return response()->json($usuarios, 200);
 	}
@@ -70,5 +70,14 @@ class UsuarioController extends Controller
 	{
 		$usuario->update($request->all());
 		return response()->json(["message" => "Se ha actualizado el usuario"], 200);
+	}
+
+	public function destroy(Request $request, Usuario $usuario)
+	{
+		$usuario->delete();
+		return response()->json(
+			["Se ha eliminado el Usuario " . $usuario->usuario . " con exito"],
+			200
+		);
 	}
 }
