@@ -23,8 +23,9 @@ class BitacoraController extends Controller
 		//verificar si en el params se encuentra datos
 		$date_inicial = !$validarFechas ? date("Y-01-01") : Date($request->fecha_inicio);
 		$date_final = !$validarFechas ? date("Y-12-31") : Date($request->fecha_fin);
-
-		$bitacoras = Bitacora::whereBetween("Fecha", [$date_inicial, $date_final])->with("movimiento", "usuario")->paginate(2);
+		$request->tipo_id == '' ?	
+		$bitacoras = Bitacora::whereBetween("Fecha", [$date_inicial, $date_final])->with("movimiento", "usuario")->orderBy("Fecha", "desc")->paginate(10)
+		: $bitacoras = Bitacora::whereBetween("Fecha", [$date_inicial, $date_final])->where("tipo_id", $request->tipo_id)->with("movimiento", "usuario")->orderBy("Fecha", "desc")->paginate(10);
 		return response()->json($bitacoras, 200);
 	}
 	public function movimientos()
