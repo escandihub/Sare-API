@@ -53,7 +53,7 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
 	Route::apiResource("permisos", PermisoController::class);
 
 	Route::apiResource("grupos", GrupoController::class);
-	Route::apiResource("bitacoras", BitacoraController::class);
+	Route::apiResource("bitacoras", BitacoraController::class)->only(["index"]);
 	
 
 	Route::get("bitacora_detalles", [
