@@ -61,9 +61,9 @@ class LicenciaPorEmpresaPolicy
      */
     public function update(Usuario $usuario, LicenciaEmpresa $licenciaEmpresa)
     {
-        return $usuario->enlace->id === $licenciaEmpresa->IdEnlaceMunicipal 
+        return $usuario->enlace->id === $licenciaEmpresa->IdEnlaceMunicipal && $licenciaEmpresa->MesConcluido == 0
         ? Response::allow()
-        : Response::deny('Privilegios insuficientes esta licencia no le pertenece.');
+        : Response::deny('Privilegios insuficientes para esta operación.');
     }
 
     /**
