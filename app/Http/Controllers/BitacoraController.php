@@ -16,14 +16,17 @@ class BitacoraController extends Controller
 	 */
 	public function index(Request $request)
 	{
+		\Gate::authorize("tiene-acceso", "bitacora.index");
 		$validarFechas = $request->validate([
 			"fecha_inicio" => "date",
 			"fecha_fin" => "date",
 		]);
 		//verificar si en el params se encuentra datos
-		$date_inicial = !$validarFechas ? date("Y-01-01") : Date($request->fecha_inicio);
+		$date_inicial = !$validarFechas
+			? date("Y-01-01")
+			: Date($request->fecha_inicio);
 		$date_final = !$validarFechas ? date("Y-12-31") : Date($request->fecha_fin);
-		
+
 		$request->tipo_id == ""
 			? ($bitacoras = Bitacora::whereBetween("Fecha", [
 				$date_inicial,
@@ -44,6 +47,7 @@ class BitacoraController extends Controller
 	}
 	public function movimientos()
 	{
+		\Gate::authorize("tiene-acceso", "bitacora.index");
 		$tipos = bitacoraTipo::all();
 
 		return response()->json(
