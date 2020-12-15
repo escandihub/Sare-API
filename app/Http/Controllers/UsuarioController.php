@@ -31,7 +31,7 @@ class UsuarioController extends Controller
 	 */
 	public function store(UsuarioRequest $request)
 	{
-		\Gate::authorize("tiene-acceso","full-access");
+		\Gate::authorize("tiene-acceso", "full-access");
 		$usuario = new Usuario();
 		$password = Hash::make($request->password);
 
@@ -69,14 +69,14 @@ class UsuarioController extends Controller
 	 */
 	public function update(UsuarioRequest $request, Usuario $usuario)
 	{
-		\Gate::authorize("tiene-acceso","full-access");
+		\Gate::authorize("tiene-acceso", "full-access");
 		$usuario->update($request->all());
 		return response()->json(["message" => "Se ha actualizado el usuario"], 200);
 	}
 
 	public function destroy(Request $request, Usuario $usuario)
 	{
-		\Gate::authorize("tiene-acceso","full-access");
+		\Gate::authorize("tiene-acceso", "full-access");
 		$usuario->delete();
 		return response()->json(
 			["Se ha eliminado el Usuario " . $usuario->usuario . " con exito"],
