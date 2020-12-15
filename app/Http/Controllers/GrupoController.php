@@ -21,6 +21,7 @@ class GrupoController extends Controller
 	 */
 	public function index()
 	{
+		\Gate::authorize('tiene-acceso', 'grupo.index');
 		$grupos = Grupo::all();
 		return response()->json($grupos, 200);
 	}
@@ -33,6 +34,7 @@ class GrupoController extends Controller
 	 */
 	public function store(GrupoRequest $request)
 	{
+		\Gate::authorize('tiene-acceso', 'grupo.update');
 		$grupo = Grupo::create($request->all());
 		return response()->json(
 			["message" => "Grupo agregado", "grupo" => $grupo],
@@ -48,6 +50,7 @@ class GrupoController extends Controller
 	 */
 	public function show($id)
 	{
+		\Gate::authorize('tiene-acceso', 'grupo.index');
 		$permisos = Grupo::find($id)->permisos;
 		return response()->json($permisos, 200);
 	}
@@ -61,6 +64,7 @@ class GrupoController extends Controller
 	 */
 	public function update(GrupoRequest $request, Grupo $grupo)
 	{
+		\Gate::authorize('tiene-acceso', 'grupo.update');
 		$grupo->update($request->all());
 		$grupo->permisos()->sync($request->privilegios);
 		return response()->json(["message" => "Grupo actualizado"], 200);

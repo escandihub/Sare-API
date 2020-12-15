@@ -29,7 +29,7 @@ class PermisoController extends Controller
 	 */
 	public function store(PermisoRequest $request)
 	{
-		\Gate::authorize('tiene-permiso', 'permiso.index');
+		\Gate::authorize('tiene-acceso', 'grupo.index');
 		Permiso::create($request->only("Permiso"));
 		return response()->json(["message" => "Permiso agregado"], 201);
 	}
@@ -54,7 +54,7 @@ class PermisoController extends Controller
 	 */
 	public function update(PermisoRequest $request, Permiso $permiso)
 	{
-		\Gate::authorize('tiene-permiso', 'permiso.update');
+		\Gate::authorize('tiene-acceso', 'grupo.update');
 		$permiso->update($request->only("Status"));
 		return response()->json(["message" => "Permiso actualizado"], 200);
 	}
