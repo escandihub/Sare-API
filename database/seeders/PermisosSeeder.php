@@ -131,6 +131,7 @@ class PermisosSeeder extends Seeder
 			"slug" => "documento.own.update",
 			"descripcion" => "Puede actualizar sus archivos que el usuario ha subido",
 		]);
+		// enlaces operation
 		Permiso::create([
 			"nombre" => "enlace",
 			"slug" => "enlace.index",
