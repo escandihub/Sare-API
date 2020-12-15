@@ -47,9 +47,10 @@
 			<div class="mb-3">
       <img class="logo float-left" src="img/COESMER.png">
 			<div class="text-center">
-				  Indicadores de Operación por Empresas en los Módulos SARE del Mes de Enero
+					Indicadores de Operación por Empresas en los Módulos SARE de
+					{{ date('Y/m/d', strtotime($fecha)) }} al {{ date('Y/m/d', strtotime($fecha_fin)) }}
 			</div>
-			</div
+		</div>
 
 			<table class="table table-bordered mt-5">
 				<thead>
@@ -75,7 +76,7 @@
 			</table>
 		<footer class="footer">
       <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+         <span class="text-muted ">{{ $author }}</span>
 				<div class="linea"></div>
       </div>
     </footer>
