@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('tiene-acceso', function (Usuario $user, $param) {
+        Gate::define('tiene-acceso', function (Usuario $user, $param = '') {
             return $user->tienePermiso($param) 
             ? Response::allow()
             : Response::deny('Privilegios insuficientes.');
