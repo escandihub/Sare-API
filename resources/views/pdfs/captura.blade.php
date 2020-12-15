@@ -79,7 +79,7 @@
 			</table>
 		<footer class="footer">
       <div class="container">
-        <span class="text-muted text-justify"> {{ $usuario->nombre }}</span>
+        <span class="text-muted text-justify"> {{ $nombre }}</span>
 				<div class="linea"></div>
       </div>
     </footer>
