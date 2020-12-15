@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Reportes;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Usuario;
-use PDF, File;
+use PDF;
 use Illuminate\Support\Facades\Auth;
-
 /**
  * @api
  */
@@ -18,11 +16,13 @@ class ReporteController extends Controller
 
 	public function capturas(Request $request)
 	{
+		
 		$validatedData = $request->validate([
 			"fecha_inicio" => "required",
 			"fecha_fin" => "required",
 		]);
 
+		\Gate::authorize('hasRole', 'enlace');
 		$capturas = $this->findByMonth(
 			self::LICENCIA,
 			$request->fecha_inicio,
@@ -32,9 +32,10 @@ class ReporteController extends Controller
 		// \Log::alert('fecha 1 ' . $request->fecha_inicio . " fecha 2 " .  $request->fecha_fin);
 		// \Log::info(count($capturas));
 		// $capturas = $this->findByMonth(self::LICENCIA, "2019-10-01", "2019-10-03");
-		if (count($capturas) != 0) {
-			$usuario = \Auth::user();
+		if (false) {
+			
 			// dd($capturas->municipio->Enlace_Municipal);
+			$nombre = \Auth::user()->nombre;
 			$pdf = PDF::loadView(
 				"pdfs.captura",
 				compact("capturas", "usuario")
@@ -46,15 +47,23 @@ class ReporteController extends Controller
 					"message" => "No se encontrar datos con el criterio de busqueda",
 					"status" => false,
 				],
-				204
+				404
 			);
 		}
 
 		//return $pdf->stream('archivo.pdf');
 	}
 
+	/**
+	 * este metodo no se implementa
+	 * ya que en los requisitos no es solicitado
+	 *
+	 * @param Type $var
+	 * @return void
+	 */
 	public function licencias(Type $var = null)
 	{
+		\Gate::authorize('hasRole', 'enlace');
 		$licencias = $this->findByMonth(self::EMPRESA, "2019-10-01", "2019-10-05");
 		// dd($capturas);
 		$pdf = PDF::loadView("pdfs.licencias", compact("licencias"))->setPaper(
