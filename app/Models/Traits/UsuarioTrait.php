@@ -12,6 +12,10 @@ trait UsuarioTrait
 	{
 		return $this->belongsToMany("App\Models\Grupo")->withTimesTamps();
 	}
+	public function hasRole($slug)
+	{
+        return in_array($slug, $this->grupo->pluck('slug')->toArray());
+	}
 	public function tienePermiso($perm)
 	{
 		$grupos = $this->grupo;

@@ -37,5 +37,11 @@ class AuthServiceProvider extends ServiceProvider
             ? Response::allow()
             : Response::deny('Privilegios insuficientes.');
         });
+
+        Gate::define('hasRole', function (Usuario $user, $slug) {
+            return $user->hasRole($slug) 
+            ? Response::allow()
+            : Response::deny('Privilegios insuficientes.');
+        });
     }
 }
