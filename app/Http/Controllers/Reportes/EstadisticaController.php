@@ -23,9 +23,11 @@ class EstadisticaController extends Controller
 	 */
 	public function documento(EstadisticaRequest $request)
 	{
-		$empresas = $this->indicadorGeneralReporte("Enero", "2019");
-
-		$doc = PDF::loadView("pdfs.empresas", compact("empresas"));
+		$empresas = $this->indicadorGeneralReporte($request->fecha_inicio, $request->fecha_fin);
+		$fecha = $request->fecha_inicio;
+		$fecha_fin = $request->fecha_fin;
+		$author = \Auth::user()->nombre;
+		$doc = PDF::loadView("pdfs.empresas", compact("empresas", "fecha", "fecha_fin", "author"));
 		
 		return $doc->download("estadistica_empresa.pdf");
 	}
@@ -34,7 +36,7 @@ class EstadisticaController extends Controller
 	 * result to  make a document
 	 * @return query result
 	 */
-	final public function indicadorGeneralReporte($month, $year)
+	final public function indicadorGeneralReporte($inicio, $fin)
 	{
 		$estadistica_captura = LicenciaEmpresa::leftjoin(
 			"catalogoenlaces",
@@ -42,10 +44,11 @@ class EstadisticaController extends Controller
 			"=",
 			"catalogoenlaces.id"
 		)
-			->where([
-				["licencias_empresa.Mes", "=", $month],
-				["licencias_empresa.Year", "=", $year],
-			])
+			// ->where([
+			// 	["licencias_empresa.Mes", "=", $month],
+			// 	["licencias_empresa.Year", "=", $year],
+			// ])
+			->whereBetween("FechaCreacion", [$inicio, $fin])
 			->groupBy("catalogoenlaces.Enlace_Municipal")
 			->select(
 				DB::raw("
