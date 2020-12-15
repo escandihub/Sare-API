@@ -17,13 +17,14 @@ class EstadisticaModulosSARE extends Controller
 	 * result to  make a document
 	 * @return query result
 	 */
-	public function documento(EstadisticaRequest $request)
+	// public function documento(EstadisticaRequest $request)
+	public function documento(Request $request)
 	{
-        $modulos = $this->queryModuloSARE("Enero", "2019");
-        $pdf = PDF::loadView("pdfs.modulo_estadistica", compact("modulos"));
+		$modulos = $this->queryModuloSARE("Enero", "2019");
+		$pdf = PDF::loadView("pdfs.modulo_estadistica", compact("modulos"));
 		return $pdf->download("modulo_estadistica.pdf");
-    }
-    
+	}
+
 	final public function queryModuloSARE($month, $year)
 	{
 		$estadistica_captura = Licencia::leftjoin(
