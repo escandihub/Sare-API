@@ -15,6 +15,7 @@ class EnlaceController extends Controller
 	 */
 	public function index()
 	{
+		\Gate::authorize('tiene-acceso', 'enlace.index');
 		$enlaces = Enlace::all();
 		return response()->json($enlaces, 200);
 	}
@@ -27,6 +28,7 @@ class EnlaceController extends Controller
 	 */
 	public function store(EnlaceRequest $request)
 	{
+		\Gate::authorize('tiene-acceso', 'enlace.store');
 		$enlace = Enlace::create($request->all());
 		return response()->json(
 			["message" => "Enlace registrado", "enlace" => $enlace],
