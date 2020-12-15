@@ -23,13 +23,29 @@ class EstadisticaController extends Controller
 	 */
 	public function documento(EstadisticaRequest $request)
 	{
-		$empresas = $this->indicadorGeneralReporte($request->fecha_inicio, $request->fecha_fin);
-		$fecha = $request->fecha_inicio;
-		$fecha_fin = $request->fecha_fin;
-		$author = \Auth::user()->nombre;
-		$doc = PDF::loadView("pdfs.empresas", compact("empresas", "fecha", "fecha_fin", "author"));
-		
-		return $doc->download("estadistica_empresa.pdf");
+		\Gate::authorize("tiene-acceso", "documento.estadistica");
+		$empresas = $this->indicadorGeneralReporte(
+			$request->fecha_inicio,
+			$request->fecha_fin
+		);
+		if (count($empresas) > 0) {
+			$fecha = $request->fecha_inicio;
+			$fecha_fin = $request->fecha_fin;
+			$author = \Auth::user()->nombre;
+			$doc = PDF::loadView(
+				"pdfs.empresas",
+				compact("empresas", "fecha", "fecha_fin", "author")
+			);
+
+			return $doc->download("estadistica_empresa.pdf");
+		} else {
+			$header = ["Content-Type: application/json"];
+			return response()->json(
+				["message" => "No se encontraron datos cone ese criterio"],
+				404,
+				$header
+			);
+		}
 	}
 	/**
 	 * The query going to return the array of query
