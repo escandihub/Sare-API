@@ -16,17 +16,22 @@ class PermisosSeeder extends Seeder
 	{
 		//administracion de usuarios
 		Permiso::create([
-			"nombre" => "",
+			"nombre" => "usarios",
 			"slug" => "usuario.index",
-			"descripcion" => "",
+			"descripcion" => "puede ver todos los usuario",
 		]);
 		Permiso::create([
-			"nombre" => "",
+			"nombre" => "usuario",
 			"slug" => "usuario.update",
-			"descripcion" => "puede actualizar a cualquier usuario",
+			"descripcion" => "puede cambiar los datos de todos los usuario",
 		]);
 		Permiso::create([
-			"nombre" => "",
+			"nombre" => "usuario",
+			"slug" => "usuario.show",
+			"descripcion" => "puede su informacion completa de un usuario",
+		]);
+		Permiso::create([
+			"nombre" => "usuario",
 			"slug" => "usuario.delete",
 			"descripcion" => "Puede eliminar a cualquier usuario",
 		]);
