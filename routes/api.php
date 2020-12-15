@@ -76,7 +76,8 @@ Route::post("/reset-users-password", [
 ]);
 
 //endpoint generate pdf via dompPDF
-Route::get("/capturas/documento", [ReporteController::class, "capturas"]);
+Route::get("/capturas/documento", [ReporteController::class, "capturas"]); //enlaces
+//super usuarios
 Route::get("/estadistica/totales", [EstadisticaModulosSARE::class, "documento"]);
 Route::get("/estadistica/por-empresa", [EstadisticaController::class, "documento"]);
 
@@ -91,7 +92,7 @@ Route::group(["middleware" => ["api"]], function () {
 		return "0";
 	});
 });
-Route::apiResource("capturas", LicenciaEmpresaController::class);
+Route::apiResource("capturas", LicenciaEmpresaController::class)->except("show");
 Route::apiResource("licencias", LicenciaController::class);
 Route::get("licencia/per_dates", [
 	LicenciaController::class,
