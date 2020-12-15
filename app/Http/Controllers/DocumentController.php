@@ -22,7 +22,8 @@ class DocumentController extends Controller
 		// (string) Str::orderedUuid();
 
 		// if ($files = $request->file("file")) {
-		\Gate::authorize("tiene-acceso", "documento.store");
+		\Gate::authorize("hasRole", "enlace"); // si es enlace
+		\Gate::authorize("tiene-acceso", "documento.store"); //puede guardar?
 		$enlace_municipal = Auth::user()->enlace;
 
 		//Formato para el archivo a salvar
@@ -61,7 +62,7 @@ class DocumentController extends Controller
 
 	public function index()
 	{
-		if (\Gate::allows("tiene-acceso", "full-access")) {
+		if (\Gate::allows("tiene-acceso", "documento.show")) {
 			$documentos = Documento::all();
 			return $documentos;
 		} else {
