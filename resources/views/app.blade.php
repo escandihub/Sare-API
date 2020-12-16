@@ -19,8 +19,8 @@
         }
       }
     </script>
-		<link href="{{ asset('/dist/css/chunk-210452ed.9b2c5b6b.css') }}"  type="text/css"  rel="prefetch" />
-		<link href="{{ asset('/dist/css/chunk-5d09c4e2.26fb9dcc.css') }}"  type="text/css"  rel="prefetch" />
+		<link href="{{ asset('/dist/css/chunk-210452ed.9b2c5b6b.css') }}" rel="prefetch" />
+		<link href="{{ asset('/dist/css/chunk-5d09c4e2.26fb9dcc.css') }}" rel="prefetch" />
 		<link href="{{ asset('/dist/js/about.e5d86d95.js') }}" rel="prefetch" />
 		<link href="{{ asset('/dist/js/chunk-210452ed.62bce3c7.js') }}" rel="prefetch" />
 		<link href="{{ asset('/dist/js/chunk-2d0b1d7b.da9427d4.js') }}" rel="prefetch" />
@@ -38,10 +38,10 @@
 		<link href="{{ asset('/dist/js/chunk-5d09c4e2.50df2277.js') }}" rel="prefetch" />
 		<link href="{{ asset('/dist/js/chunk-7c2a37e4.a6b9c081.js') }}" rel="prefetch" />
 		<link href="{{ asset('/dist/js/chunk-9e9c9b90.5c5cdf13.js') }}" rel="prefetch" />
-		<link href="{{ asset('/dist/css/app.96098bc6.css') }}"  type="text/css"  rel="preload" as="style" />
+		<link href="{{ asset('/dist/css/app.96098bc6.css') }}" rel="preload" as="style" />
 		<link href="{{ asset('/dist/js/app.5c352651.js') }}" rel="preload" as="script" />
 		<link href="{{ asset('/dist/js/chunk-vendors.46955cb0.js') }}" rel="preload" as="script" />
-		<link href="{{ asset('/dist/css/app.96098bc6.css') }}"  type="text/css"  rel="stylesheet" />
+		<link href="{{ asset('/dist/css/app.96098bc6.css') }}" rel="stylesheet" />
 
 
 
