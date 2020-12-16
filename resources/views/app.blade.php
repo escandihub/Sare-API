@@ -15,7 +15,7 @@
     <script>
       window.config = {
         config: {
-          URL_API: 'http://32800abb0ca7.ngrok.io'
+          URL_API: 'https://gentle-hollows-57049.herokuapp.com/'
         }
       }
     </script>
