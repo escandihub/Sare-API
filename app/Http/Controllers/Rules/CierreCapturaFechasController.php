@@ -11,11 +11,13 @@ class CierreCapturaFechasController extends Controller
 {
 	public function index()
 	{
+		\Gate::authorize('tiene-acceso', 'fechas.index');
 		$fechas = CierreCaptura::findOrFail(1);
 		return response()->json($fechas, 200);
 	}
 	public function update(CierreCaptura $captura_fecha, Request $request)
 	{
+		\Gate::authorize('tiene-acceso', 'fechas.index');
 		$validate = $request->validate([
 			"fecha_inicial" => "required",
 			"fecha_final" => "required",
@@ -24,7 +26,7 @@ class CierreCapturaFechasController extends Controller
 
 		return response()->json(
 			["message" => "Se ha actualizado las fechas con exito"],
-			200
+			201
 		);
 	}
 }
