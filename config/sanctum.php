@@ -13,7 +13,8 @@ return [
     |
     */
         // if i am on localhost then localhost:8000 when i be on serve by the spa then localhost:8080
-    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', 'localhost:8080')),
+        //the port of where the app goint to be is important //'localhost:1024'
+    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', '*')),
 
     /*
     |--------------------------------------------------------------------------
