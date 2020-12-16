@@ -66,3 +66,5 @@
     <script src="{{ asset('/dist/js/app.5c352651.js')}}"></script>
   </body>
 </html>
+
+{{-- web: vendor/bin/heroku-php-apache2 public/ --}}
