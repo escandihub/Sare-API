@@ -63,7 +63,7 @@ class DocumentController extends Controller
 	public function index()
 	{
 		if (\Gate::allows("tiene-acceso", "documento.show")) {
-			$documentos = Documento::all();
+			$documentos = Documento::with('municipio')->get();
 			return $documentos;
 		} else {
 			\Gate::authorize("tiene-acceso", "documento.own.show");
@@ -71,7 +71,7 @@ class DocumentController extends Controller
 				"municipio_id",
 				"=",
 				Auth::user()->enlace->id
-			)->get();
+			)->with('municipio')->get();
 			return $documentos;
 		}
 	}
