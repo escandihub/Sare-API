@@ -81,12 +81,22 @@ class DocumentController extends Controller
 		$folder_name = $this->replaceSpecialCharacters(
 			$file->municipio->Enlace_Municipal
 		);
-		$path = public_path("uploads/" . $folder_name . "/" . $file->titulo);
-		// return $path = storage_path($file->titulo);
+		$ruta = "uploads/" . $folder_name . "/" . $file->titulo;
+		$existe = file_exists($ruta);
+		
 
-		return Response::make(file_get_contents($path), 200, [
+		if ($existe) {
+			$path = public_path("uploads/" . $folder_name . "/" . $file->titulo);
+			return Response::make(file_get_contents($path), 200, [
 			"Content-Type" => "application/pdf",
 			"Content-Disposition" => 'inline; filename="' . $file->titulo . '"',
 		]);
+		} else {
+			return response()->json(['message' => 'El archivo no existe'], 200);
+		}
+		
+		// return $path = storage_path($file->titulo);
+
+		
 	}
 }
