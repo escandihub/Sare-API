@@ -68,3 +68,6 @@ composer install
 php artisan key:generate
 
 ### Conf .env to Database
+
+### nota
+- los chicos del proyecto no reportaron a tiempo cuando fue solicitada la información para poder continiar apoyandolos
