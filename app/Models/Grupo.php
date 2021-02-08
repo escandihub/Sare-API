@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\BicatoraEventoLogger;
 class Grupo extends Model
 {
-	use HasFactory;
+	use HasFactory, BicatoraEventoLogger;
 	// protected $table = 'catalogogrupos';
 	// protected $primaryKey = 'Id';
 

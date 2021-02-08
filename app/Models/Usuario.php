@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use App\Models\Traits\BicatoraEventoLogger;
 use App\Models\Traits\UsuarioTrait;
 
 class Usuario extends Authenticatable
 {
-	use HasFactory, UsuarioTrait;
+	use HasFactory, UsuarioTrait, BicatoraEventoLogger;
 	// protected $table = 'catalogousuarios';
 	// protected $primaryKey = 'Id';
 
