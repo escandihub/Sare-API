@@ -38,6 +38,7 @@ class DocumentController extends Controller
 		$nombre_archivo =
 			$municipio . "_" . $today . "." . $request->file->extension();
 
+			//verificar que no exista un documento de este mes
 		$existe = Documento::where("titulo", "=", $nombre_archivo)->get();
 
 		if (!count($existe)) {
